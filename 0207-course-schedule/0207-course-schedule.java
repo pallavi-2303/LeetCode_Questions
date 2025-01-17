@@ -3,7 +3,6 @@ class Solution {
        int V=numCourses;
        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
        int n=arr.length;
-       if(n==0) return true;
        for(int i=0;i<V;i++){
     adj.add(new ArrayList<>());
        }
@@ -13,14 +12,14 @@ class Solution {
     //if topological sort is valid then this is possible
     int[] indegree=new int[V];
     int[] vis=new int[V];
-    for(int i=0;i<n;i++){
+    for(int i=0;i<V;i++){
     for(int it:adj.get(i)){
         indegree[it]++;
     }
     }
     Queue<Integer> q=new LinkedList<>();
     //adding in q whose indegree is zero
-for(int i=0;i<n;i++){
+for(int i=0;i<V;i++){
     if(indegree[i]==0){
         vis[i]=1;
         q.add(i);
