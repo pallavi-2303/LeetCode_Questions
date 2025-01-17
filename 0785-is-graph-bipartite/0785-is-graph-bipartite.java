@@ -59,8 +59,8 @@ return true;//if we are able to color the whole graph
     Arrays.fill(color,-1);
    for(int i=0;i<V;i++){
    if(color[i]==-1) {
- // if(dfs(i,color,0,adj)==false){
- if(bfs(i,color,0,graph)==false) {
+ if(dfs(i,color,0,graph)==false){
+// if(bfs(i,color,0,graph)==false) {
    return false; }
   }
    }
