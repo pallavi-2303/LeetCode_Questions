@@ -1,37 +1,49 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] arr) {
- int V=numCourses;
-int n=arr.length;
-ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
-for(int i=0;i<V;i++){
- adj.add(new ArrayList<>());
-}
-//making the adjacency list
+       int V=numCourses;
+       ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
+       int n=arr.length;
+       if(n==0) return true;
+       for(int i=0;i<V;i++){
+    adj.add(new ArrayList<>());
+       }
+       for(int i=0;i<n;i++){
+    adj.get(arr[i][1]).add(arr[i][0]);
+       }
+    //if topological sort is valid then this is possible
+    int[] indegree=new int[V];
+    int[] vis=new int[V];
+    for(int i=0;i<n;i++){
+    for(int it:adj.get(i)){
+        indegree[it]++;
+    }
+    }
+    Queue<Integer> q=new LinkedList<>();
+    //adding in q whose indegree is zero
 for(int i=0;i<n;i++){
-adj.get(arr[i][1]).add(arr[i][0]);
+    if(indegree[i]==0){
+        vis[i]=1;
+        q.add(i);
+    }
 }
-//performing topoSort
-int[] indegree=new int[V];
-Queue<Integer> q=new LinkedList<>();
-for(int i=0;i<V;i++){
- for(int it:adj.get(i)){
- indegree[it]++;}}
-//putting in queue whose incoming edge is 0
-for(int i=0;i<V;i++){
- if(indegree[i]==0){
- q.add(i);}}
- //performing bfs to get toposort
- int idx=0;
- while(!q.isEmpty()){
- int node=q.poll();
- idx++;
- for(int it:adj.get(node)){
-  //removing the node as it is in toposort
-  indegree[it]--;
-  if(indegree[it]==0){
-  q.add(it);}}}
-  if(idx==V) return true;
-  return false;
-        
+int count=0;
+while(!q.isEmpty()){
+int node=q.poll();
+count++;
+for(int it:adj.get(node)){
+if(vis[it]==0){
+    indegree[it]--;
+if(indegree[it]==0){
+q.add(it);
+vis[it]=1;
+}
+}
+}
+}
+return count==V ? true:false;
+
+
+
+
     }
 }
