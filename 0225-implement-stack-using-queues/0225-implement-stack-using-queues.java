@@ -1,36 +1,46 @@
 class MyStack {
-Queue<Integer> q=new LinkedList<>();
+ Queue<Integer> q=new LinkedList<>();
+
     public MyStack() {
         
     }
     
     public void push(int x) {
-      //push efficient function
-      q.add(x) ;
+      // q.add(x); 
+     //pop and top efficient 
+   if(q.size()==0) q.add(x);
+   else {
+  q.add(x);
+  for(int i=1;i<=q.size()-1;i++){
+   q.add(q.remove());}}
+  
+    
     }
     
     public int pop() {
-     if(q.size()==0)   return -1;
-     int size=q.size();
-     for(int i=1;i<size;i++){
-q.add(q.remove());
-     }
-return q.poll();
+   /*int n=q.size();
+    if(n==0) return -1;
+  for(int i=1;i<=n-1;i++) {
+   q.add(q.remove());}
+        return q.remove();*/
+    return   q.remove();
     }
     
     public int top() {
- if(q.size()==0) return -1;
- int size=q.size();
- for(int i=1;i<size;i++){
+  /*int n=q.size();
+  if(n==0) return -1;
+  for(int i=1;i<=n-1;i++) {
+   q.add(q.remove());}
+  int x=q.peek();
     q.add(q.remove());
- }
-int x=q.peek();
-q.add(q.remove());
-return x;   
+      return x;*/
+      return q.peek();
+        
     }
     
     public boolean empty() {
-       return q.isEmpty(); 
+   return q.size()==0 ? true : false;
+        
     }
 }
 
