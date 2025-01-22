@@ -1,47 +1,54 @@
 class Solution {
- public static int[] PrevSmaller(int[] arr) {
+    private int mod=1000000000+7;
+    public void NSE(int[] arr,int[] nse){
  int n=arr.length;
- int[] pse=new int[n];
  Stack<Integer> st=new Stack<>();
- for(int i=0;i<n;i++) {
- while(st.size()>0 && arr[i]<arr[st.peek()]) {
+ for(int i=n-1;i>=0;i--){
+ while(!st.isEmpty() && arr[st.peek()]>arr[i]) {
   st.pop();
  }
- pse[i]=st.size()==0 ? -1: st.peek();
- st.push(i);}
- return pse;}
-   
-   public static int[] NextSmaller(int[] arr) {
-  int n=arr.length;
-int[] nse=new int[n];
-Stack<Integer> st=new Stack<>();
-for(int i=n-1;i>=0;i--) {
-while(st.size()>0 && arr[i]<=arr[st.peek()]) {
- st.pop();
-}
-nse[i]=st.size()==0 ? n : st.peek();
+nse[i]=st.isEmpty() ? n:st.peek();
 st.push(i);
+ }
 }
-return nse;
+public void PSE(int[] arr,int[] pse){
+ int n=arr.length;
+ Stack<Integer> st=new Stack<>();
+ for(int i=0;i<n;i++){
+ while(!st.isEmpty() && arr[st.peek()]>=arr[i]) {
+  st.pop();
+ }
+pse[i]=st.isEmpty() ? -1:st.peek();
+st.push(i);
+ }
 }
     public int sumSubarrayMins(int[] arr) {
-    int n=arr.length;
-int[] pse=PrevSmaller(arr) ;
-int[] nse=NextSmaller(arr);
-int mod=1000000000+7;
- long count=0;
-for(int i=0;i<n;i++) {
-//finding out number of elements which are greater the given element as it will be smaller and contribute to ans
-long left=i-pse[i];
-long right=nse[i]-i; 
-
-//total contribution 
-long product=(left*right) %mod;
-product=(product*arr[i])%mod;
-count=(count%mod+product)%mod;
+      int n=arr.length;
+/*brute force generating all subrray and finding minimum of all and adding them up
+int sum=0;
+for(int i=0;i<n;i++){
+ int mini=arr[i];
+ for(int j=i;j<n;j++){
+  mini=Math.min(mini,arr[j]);
+  sum+=mini%mod;
+ }
 }
-return (int)count;
-  
-        
+return sum;  */
+//optimal aproach if we can find in how many subaaray particular element is contributing we can find its sum by not*arr[i];
+int[] pse=new int[n];
+int[] nse=new int[n];
+NSE(arr,nse);
+PSE(arr,pse);
+//Now finding out the sum
+long leftConti=0;
+long rightConti=0;
+long sum=0;
+for(int i=0;i<n;i++){
+leftConti=i-pse[i];//no of ellemts on left in which this particular ellement is smaller
+rightConti=nse[i]-i;
+long totalConti=(leftConti*rightConti)%mod;
+sum=(sum+(arr[i]*totalConti%mod)) %mod;
+}
+return (int)sum;
     }
 }
