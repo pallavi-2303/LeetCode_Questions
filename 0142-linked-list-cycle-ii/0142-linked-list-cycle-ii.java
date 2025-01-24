@@ -10,23 +10,20 @@
  * }
  */
 public class Solution {
-  public ListNode startNode(ListNode head,ListNode slow,ListNode fast){
-slow=head;
-  while(slow!=fast){
-  slow=slow.next;
-   fast=fast.next;}
-  //distance is same from starting point that is L1
-    return slow;} 
     public ListNode detectCycle(ListNode head) {
-ListNode slow=head;
-ListNode fast=head;
-while(fast!=null && fast.next!=null) {
-  slow=slow.next;
-  fast=fast.next.next;
-  if(slow==fast) {
-//collision point
-   return startNode(head,slow,fast);} }
-   return null;//if no cycle
-        
+      if(head==null || head.next==null)  return null;//as there will be no cycle
+//brute force
+HashMap<ListNode,Integer> mp=new HashMap<>() ;
+//if the node is alreaddy present in map means it is the starting point of cycle
+ListNode temp=head;
+while(temp!=null) {
+if(mp.containsKey(temp)){
+//means it is staring point of  cycle
+return temp;
+}
+mp.put(temp,1);
+temp=temp.next;
+}
+return  null;//if there is no cycle   
     }
 }
