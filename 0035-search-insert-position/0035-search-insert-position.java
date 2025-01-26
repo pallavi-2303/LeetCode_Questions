@@ -6,13 +6,16 @@ class Solution {
     int low=0;
     int high=n-1;
     while(low<=high) {
-    int mid=low+(high-mid);
-    if(nums[mid]>=target){
-        ans=mid;
-        high=mid-1;
+    int mid=low+(high-low);
+    if(nums[mid]==target){
+        return mid;
+    }
+    else if(nums[mid]<target){
+        low=mid+1;
     }
     else {
-        low=mid+1;
+ans=mid;
+high=mid-1;
     }}
     return ans;
     }
