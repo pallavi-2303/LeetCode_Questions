@@ -1,13 +1,21 @@
 class Solution {
 public int Tabu(List<Integer> arr,int n,int[] dp){
-    dp[0]=arr.get(0);
+   // dp[0]=arr.get(0);
+    int prev2=0;
+    int prev=arr.get(0);
     for(int i=1;i<n;i++){
-        int take=arr.get(i);
+       /* int take=arr.get(i);
         if(i>1) take+=dp[i-2];
         int nottake=0+dp[i-1];
-        dp[i]=Math.max(take,nottake);
+        dp[i]=Math.max(take,nottake);*/
+        int take=arr.get(i)+prev2;
+        int nottake=prev;
+        int curr=Math.max(take,nottake);
+        prev2=prev;
+        prev=curr;
     }
-    return dp[n-1];
+   // return dp[n-1];
+    return prev;
 }
     public int Memo(List<Integer> arr,int idx,int[] dp){
         if(idx<0) return 0;
