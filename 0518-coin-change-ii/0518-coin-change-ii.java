@@ -14,7 +14,24 @@ class Solution {
     public int change(int amount, int[] arr) {
      int n=arr.length;
      int[][] dp=new int[n][amount+1];
-     for(int[] a:dp) Arrays.fill(a,-1);
-     return memo(n-1,arr,amount,dp);  
+    //  for(int[] a:dp) Arrays.fill(a,-1);
+    //  return memo(n-1,arr,amount,dp);
+    int target=amount; 
+  for(int tar=0;tar<=target;tar++) {
+if(tar%arr[0]==0){
+dp[0][tar]=1;
+}
+else dp[0][tar]=0;
+  }
+  for(int i=1;i<n;i++) {
+for(int tar=0;tar<=target;tar++){
+int pick=0;
+if(arr[i]<=tar)
+pick=dp[i][tar-arr[i]];
+int notpick=dp[i-1][tar];
+dp[i][tar]=pick+notpick;
+}
+  } 
+  return dp[n-1][target];
     }
 }
