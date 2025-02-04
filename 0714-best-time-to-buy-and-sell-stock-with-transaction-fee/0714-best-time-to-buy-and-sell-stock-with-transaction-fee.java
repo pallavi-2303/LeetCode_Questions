@@ -16,18 +16,24 @@ class Solution {
      int[][] dp=new int[n+1][2];
     //  for(int[] a:dp) Arrays.fill(a,-1) ;
     //  return findMax(0,1,prices,fee,dp);
+    int[] prev=new int[2];
+    int[] curr=new int[2];
     for(int i=n-1;i>=0;i--){
         for(int buy=0;buy<=1;buy++){
           int profit=0;
     if(buy==1){
-        profit=Math.max(-prices[i]+dp[i+1][0],dp[i+1][1]);
+       // profit=Math.max(-prices[i]+dp[i+1][0],dp[i+1][1]);
+       profit=Math.max(-prices[i]+prev[0],prev[1]);
     }
     else {
-         profit=Math.max(prices[i]-fee+dp[i+1][1],dp[i+1][0]);
+       //  profit=Math.max(prices[i]-fee+dp[i+1][1],dp[i+1][0]);
+        profit=Math.max(prices[i]-fee+prev[1],prev[0]);
     } 
-    dp[i][buy]=profit;  
+    curr[buy]=profit;  
         }
+        prev=curr.clone();
     }
-    return dp[0][1];
+   // return dp[0][1];
+   return prev[1];
     }
 }
