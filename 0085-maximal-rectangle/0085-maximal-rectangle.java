@@ -23,17 +23,37 @@ class Solution {
     }
     public int largestRectangle(int[] heights){
       int n=heights.length;
-       int[] nse=new int[n];
-       int[] pse=new int[n];
-        NSE(heights,nse);
-        PSE(heights,pse);
-     int maxArea=0;
-     //calculating  area of ech rectange
-     for(int i=0;i<n;i++) {
-    int area=heights[i]*(nse[i]-pse[i]-1);
-    maxArea=Math.max(area,maxArea);
+    //    int[] nse=new int[n];
+    //    int[] pse=new int[n];
+    //     NSE(heights,nse);
+    //     PSE(heights,pse);
+    //  int maxArea=0;
+    //  //calculating  area of ech rectange
+    //  for(int i=0;i<n;i++) {
+    // int area=heights[i]*(nse[i]-pse[i]-1);
+    // maxArea=Math.max(area,maxArea);
+    //  }
+    //  return maxArea;  
+    Stack<Integer> st=new Stack<>();
+   int maxi=0;
+   for(int i=0;i<n;i++) {
+    while(!st.isEmpty() && heights[st.peek()]>heights[i]){
+    int nse=i;
+    int ele=st.pop();
+    int pse=st.isEmpty() ? -1 :st.peek();
+    int area=heights[ele]*(nse-pse-1);
+    maxi=Math.max(maxi,area);
+    }
+    st.push(i);
+   }
+      while(!st.isEmpty()){
+    int ele=st.pop();
+    int nse=n;
+    int pse=st.isEmpty() ? -1 :st.peek();
+    int area=((nse-pse-1)*heights[ele]);
+    maxi=Math.max(maxi,area);
      }
-     return maxArea;  
+     return maxi;
     }
     public int maximalRectangle(char[][] matrix) {
      int n=matrix.length;
