@@ -28,7 +28,7 @@ class Solution {
     // }
     // return mini;
     //base case
-for(int j=0;j<m;j++){
+/*for(int j=0;j<m;j++){
 dp[0][j]=mat[0][j];
 }
 for(int i=1;i<n;i++){
@@ -47,8 +47,8 @@ int mini=(int)1e9;
 for(int j=0;j<m;j++){
 mini=Math.min(dp[n-1][j],mini);
 }
-return mini;
-/*space optimization
+return mini;*/
+//space optimization
 int[] prev=new int[m];
 int[] curr=new int[m];
 //base case
@@ -64,7 +64,7 @@ if(j-1>=0)
 left=mat[i][j]+prev[j-1];
 int right=(int)1e9;
 if(j+1<m) 
-left=mat[i][j]+prev[j+1];
+right=mat[i][j]+prev[j+1];
 curr[j]=Math.min(up,Math.min(left,right));
 }
 prev=curr.clone();
@@ -73,6 +73,6 @@ int mini=(int)1e9;
 for(int j=0;j<m;j++){
 mini=Math.min(prev[j],mini);
 }
-return mini;*/
+return mini;
   }
 }
