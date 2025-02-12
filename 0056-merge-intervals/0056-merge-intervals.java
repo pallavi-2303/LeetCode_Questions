@@ -1,34 +1,35 @@
 class Solution {
-public class ArrayComparator implements Comparator<int[]>{
+  //  we have to sort the intervals on basis of starting index 
+class sortComparator implements Comparator<int[]> {
 @Override
 public int compare(int[] a,int[] b){
-    return a[0]-b[0];//sort o index in ascending order
+ return a[0]-b[0];
 }
 }
-    public int[][] merge(int[][] intervals) {
-     //sorting the intervals on basis of 0 index 
-     int n=intervals.length;
-     int m=intervals[0].length;
-     ArrayComparator mc=new ArrayComparator();
-     Arrays.sort(intervals,mc);
-     List<List<Integer>> ans=new ArrayList<>();
-    for(int i=0;i<n;i++)   {
-        if(ans.size()==0 || ans.get(ans.size()-1).get(1)<intervals[i][0]){
-        //it is sorted and it  is not overlaping
-        List<Integer> temp=Arrays.asList(intervals[i][0],intervals[i][1]);
-        ans.add(temp);
-        }
-        else {
-       //intervals 1 is not greater than it is overlaping 
-       ans.get(ans.size()-1).set(1,Math.max(intervals[i][1],ans.get(ans.size()-1).get(1))) ;   
-        }
-    }                                                       
-int size=ans.size();
-int[][] result=new int[size][2];
-for(int i=0;i<size;i++){
-    result[i][0]=ans.get(i).get(0);
-     result[i][1]=ans.get(i).get(1);
+    public int[][] merge(int[][] arr) {
+        int n=arr.length;
+Arrays.sort(arr,new sortComparator());
+List<List<Integer>> ans=new ArrayList<>();
+//Now the intervals is shorted on the basis of starting index
+for(int i=0;i<n;i++){
+List<Integer> temp=new ArrayList<>();
+int ele1=arr[i][0];
+int ele2=arr[i][1];
+if(ans.size()==0 || ans.get(ans.size()-1).get(1)<ele1) {
+temp.add(ele1);
+temp.add(ele2);
+ans.add(temp);
 }
-return result;
+else {
+ans.get(ans.size()-1).set(1,Math.max(ans.get(ans.size()-1).get(1),ele2));
+}
+}
+int m=ans.size();
+int[][] res=new int[m][2];
+for(int i=0;i<m;i++){
+res[i][0]=ans.get(i).get(0);
+res[i][1]=ans.get(i).get(1);
+}
+return res;
     }
 }
