@@ -1,16 +1,18 @@
 class Solution {
+public int findReverse(int num){
+long reverse=0;
+while(num!=0){
+int rem=num%10;
+reverse*=10;
+reverse+=rem;
+if(reverse>Integer.MAX_VALUE || reverse<Integer.MIN_VALUE ) return 0;
+num/=10;
+}
+return (int)reverse;
+}
     public int reverse(int x) {
-   long rev=0;
-        int temp=x;
-        while(temp!=0){
-            rev*=10;
-            int rem=temp%10;
-            rev+=rem;
-            temp/=10;
-            if(rev>Integer.MAX_VALUE || rev<Integer.MIN_VALUE){
-                return 0;
-            }
-        }
-        return (int)rev;
+    int num=Math.abs(x);
+int Reverse=findReverse( num);
+return x< 0 ? -(Reverse) :Reverse;
     }
 }
