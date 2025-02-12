@@ -18,8 +18,12 @@ class Solution {
     if(mp.containsKey(sum)){
    int first=mp.get(sum);
    maxi=Math.max(maxi,first+nums[i]);
+   mp.put(sum,Math.max(nums[i],mp.getOrDefault(sum,0)));
     }
-    mp.put(sum,Math.max(nums[i],mp.getOrDefault(sum,0)));
+    else {
+         mp.put(sum,nums[i]);
+    }
+    
      }
      return maxi;
     }
