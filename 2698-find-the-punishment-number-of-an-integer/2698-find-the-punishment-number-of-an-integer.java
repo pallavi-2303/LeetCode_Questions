@@ -4,6 +4,7 @@ int n=str.length();
 if(j==n){
 return currsum==i;
 }
+if(currsum>i) break;
 //try to partition at each indexes
 for(int idx=j;idx<n;idx++){
 //partion from idx to j last value is not included
