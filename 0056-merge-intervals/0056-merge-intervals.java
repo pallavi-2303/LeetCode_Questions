@@ -1,35 +1,29 @@
 class Solution {
-  //  we have to sort the intervals on basis of starting index 
-class sortComparator implements Comparator<int[]> {
-@Override
-public int compare(int[] a,int[] b){
- return a[0]-b[0];
+    public class sortComparator implements Comparator<int[]> {
+public int compare(int[] a,int[] b) {
+//sort in asscending order
+return a[0]-b[0];
 }
 }
-    public int[][] merge(int[][] arr) {
-        int n=arr.length;
-Arrays.sort(arr,new sortComparator());
-List<List<Integer>> ans=new ArrayList<>();
-//Now the intervals is shorted on the basis of starting index
+    public int[][] merge(int[][] intervals) {
+        int n=intervals.length;
+Arrays.sort(intervals,new sortComparator());
+List<List<Integer>> res=new ArrayList<>();
 for(int i=0;i<n;i++){
-List<Integer> temp=new ArrayList<>();
-int ele1=arr[i][0];
-int ele2=arr[i][1];
-if(ans.size()==0 || ans.get(ans.size()-1).get(1)<ele1) {
-temp.add(ele1);
-temp.add(ele2);
-ans.add(temp);
+if(res.size()==0 || res.get(res.size()-1).get(1)<intervals[i][0]) {
+List<Integer> temp=Arrays.asList(intervals[i][0],intervals[i][1]);
+res.add(temp);
 }
 else {
-ans.get(ans.size()-1).set(1,Math.max(ans.get(ans.size()-1).get(1),ele2));
+res.get(res.size()-1).set(1,Math.max(intervals[i][1],res.get(res.size()-1).get(1)));
 }
 }
-int m=ans.size();
-int[][] res=new int[m][2];
-for(int i=0;i<m;i++){
-res[i][0]=ans.get(i).get(0);
-res[i][1]=ans.get(i).get(1);
+int size=res.size();
+int[][] ans=new int[size][2];
+for(int i=0;i<size;i++){
+ans[i][0]=res.get(i).get(0);
+ans[i][1]=res.get(i).get(1);
 }
-return res;
+return ans;
     }
 }
