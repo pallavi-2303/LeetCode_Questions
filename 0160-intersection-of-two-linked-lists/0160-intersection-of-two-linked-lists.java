@@ -10,33 +10,36 @@
  * }
  */
 public class Solution {
-public int countNodes(ListNode head){
- int count=0;
-  while(head!=null){
-   count++;
-   head=head.next;}
-   return count;}
-public ListNode moveHead(ListNode temp,int idx){
-for(int i=1;i<=idx;i++){
- temp=temp.next;}
-  return temp;}
+    public int findSize(ListNode head){
+int size=0;
+while(head!=null){
+size++;
+head=head.next;}
+return size;}
+    public ListNode findInterSection(ListNode headA,ListNode headB) {
+while(headA!=headB) {
+headA=headA.next;
+headB=headB.next;
+}
+return headA;
+}
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-//count the nodes in both cases and node whose length is greater move that to idx places and then move simultaneously 
-int sizeA=countNodes(headA);
-int sizeB=countNodes(headB);
-ListNode tempA=headA;
-ListNode tempB=headB;
-if(sizeA>sizeB){
-int idx=sizeA-sizeB;
-tempA=moveHead(tempA,idx);}
+       // finding the size of LinkedList
+int sizeA=findSize(headA);
+int sizeB=findSize(headB);
+int diff=0;
+if(sizeA>sizeB) {
+ diff=sizeA-sizeB;
+ for(int i=1;i<=diff;i++){
+headA=headA.next;
+ }
+}
 else {
-int idx=sizeB-sizeA;
-tempB=moveHead(tempB,idx);}
-while(tempA!=tempB){
-tempA=tempA.next;
-tempB=tempB.next;}
-  return tempA;
-
-        
+diff=sizeB-sizeA;
+for(int i=1;i<=diff;i++){
+headB=headB.next;
+ }
+}
+return findInterSection(headA,headB);
     }
 }
