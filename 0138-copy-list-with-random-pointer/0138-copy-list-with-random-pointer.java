@@ -15,23 +15,24 @@ class Node {
 
 class Solution {
     public Node copyRandomList(Node head) {
-      //brute force
-//creating copyNode and putting in map and then creating the pointers
+    //Creating a copyNode and storing its value in hashmap
 HashMap<Node,Node> mp=new HashMap<>();
 Node temp=head;
-while(temp!=null){
+while(temp!=null) {
 Node copyNode=new Node(temp.val);
 mp.put(temp,copyNode);
 temp=temp.next;
 }
-//creating the next and random pointers 
+//Connecting the random and next pointer
 temp=head;
-while(temp!=null){
+while(temp!=null) {
 Node copyNode=mp.get(temp);
-copyNode.next=mp.get(temp.next);
-copyNode.random=mp.get(temp.random);
+Node nextNode=mp.get(temp.next);
+Node Random=mp.get(temp.random);
+copyNode.next=nextNode;
+copyNode.random=Random;
 temp=temp.next;
 }
-return mp.get(head);  
+return mp.get(head);    
     }
 }
