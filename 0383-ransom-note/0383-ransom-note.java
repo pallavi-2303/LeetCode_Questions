@@ -5,7 +5,7 @@ class Solution {
     }
     }
     public boolean canConstruct(String ransomNote, String magazine) {
-       HashMap<Character,Integer> mp1=new HashMap<>();
+     /*  HashMap<Character,Integer> mp1=new HashMap<>();
        HashMap<Character,Integer> mp2=new HashMap<>();
        makeHashMap(ransomNote,mp1);
         makeHashMap(magazine,mp2);
@@ -15,7 +15,21 @@ class Solution {
 return false;
    }
         }
-       return true;
+       return true;*/
+    int[] characterCount=new int[26];
+    int n=ransomNote.length();
+    int m=magazine.length();
+    if(n>=m) return false;
+    //counting all character 
+    for(char ch:magazine.toCharArray()){
+    characterCount[ch-'a']++;
+    }
+    //finding the character
+    for(char ch:ransomNote.toCharArray()){
+    if(characterCount[ch-'a']==0) return false;
+    characterCount[ch-'a']--;
+    }
+    return true;
        
     }
 }
