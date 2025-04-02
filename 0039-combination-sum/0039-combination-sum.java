@@ -1,22 +1,23 @@
 class Solution {
-    public void solve(int idx,List<List<Integer>> res,List<Integer> ds,int target,int[] nums) {
-int n=nums.length;
-if(idx==n) {
+    public void combination(int idx,int[] nums,List<Integer> temp,int target,List<List<Integer>> res) {
+if(idx==nums.length) {
 if(target==0) {
- res.add(new ArrayList<>(ds));}
-return ; 
- }
-//pick case we can pick unlimited number of times
+res.add(new ArrayList<>(temp));
+}
+return;}
 if(nums[idx]<=target) {
-ds.add(nums[idx]);
-//we can pick unlimited number of times
-solve(idx,res,ds,target-nums[idx],nums);
+temp.add(nums[idx]);
+//call for next index
+combination(idx,nums,temp,target-nums[idx],res);
+//if we have choosen the index remove that from current
+temp.remove(temp.size()-1);
+}
 //not pick case
-ds.remove(ds.size()-1);}
-solve(idx+1,res,ds,target,nums);}
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-       List<List<Integer>> ans=new ArrayList<>();
-       solve(0,ans,new ArrayList<>(),target,candidates);
-       return ans;
+combination(idx+1,nums,temp,target,res);
+}
+    public List<List<Integer>> combinationSum(int[] nums, int target) {
+        List<List<Integer>> res=new ArrayList<>();
+combination(0,nums,new ArrayList<>(),target,res);
+return res;
     }
 }
