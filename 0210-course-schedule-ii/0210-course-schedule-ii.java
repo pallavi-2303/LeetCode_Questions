@@ -1,52 +1,43 @@
 class Solution {
-    public int[] findOrder(int numCourses, int[][] arr) {
-     int n= arr.length;
-     int V=numCourses;
-     ArrayList<ArrayList<Integer>> adj=new ArrayList<>() ;
-     int[] ans=new int[V];
-     for(int i=0;i<V;i++){
-    adj.add(new ArrayList<>());
-     }
-for(int i=0;i<n;i++) {
-    adj.get(arr[i][1]).add(arr[i][0]);
+    public int[] findOrder(int numCourses, int[][] nums) {
+     int n=nums.length;
+List<List<Integer>> adj=new ArrayList<>();
+int V=numCourses;
+for(int i=0;i<V;i++){
+adj.add(new ArrayList<>());
 }
-//making the indegree
-int[] indegree=new int[V];
+for(int i=0;i<n;i++){
+    adj.get(nums[i][1]).add(nums[i][0]);
+}
+int[] indegre=new int[V];
+Queue<Integer> q=new LinkedList<>();
 int[] vis=new int[V];
 for(int i=0;i<V;i++){
-    for(int it:adj.get(i)){
-        indegree[it]++;
-    }
+for(int it:adj.get(i)) {
+indegre[it]++;
 }
-Queue<Integer> q=new LinkedList<>();
+}
 for(int i=0;i<V;i++){
-if(indegree[i]==0){
-q.add(i);
+if(indegre[i]==0){
 vis[i]=1;
+q.add(i);
 }
 }
-int idx=0;
-while(!q.isEmpty()){
+int  idx=0;
+int[] ans=new int[V];
+while(!q.isEmpty()) {
 int node=q.poll();
 ans[idx++]=node;
 for(int it:adj.get(node)){
-    if(vis[it]==0){
-    indegree[it]--;
-    if(indegree[it]==0){
-        q.add(it);
-        vis[it]=1;
-    }
-    }
+if(vis[it]==0){
+indegre[it]--;
+if(indegre[it]==0){
+q.add(it);
+vis[it]=1;
 }
 }
-
-return idx==V ? ans : new int[]{};
-
-
-
-
-
-
-
+}
+}
+return idx==V ? ans :new int[]{};   
     }
 }
