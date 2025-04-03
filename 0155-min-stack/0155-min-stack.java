@@ -1,43 +1,63 @@
 class MinStack {
- Stack<Long> st=new Stack<>();
-    Long mini;
-
+/*public class pair{
+    int first;
+    long second;
+    public pair(int first,long second){
+    this.first=first;
+    this.second=second;
+    }
+}*/
+//Stack<pair> st;
+long mini;
+Stack<Long> st;
     public MinStack() {
-    mini=Long.MAX_VALUE;
-        
+   // st=new Stack<>(); 
+st=new Stack<>();
+mini=Long.MAX_VALUE;
     }
     
     public void push(int val) {
-    Long value=Long.valueOf(val);
-   if(st.isEmpty()) {
-    mini=value;
-       st.push(value);}
-    else {
-    if(value<mini) {
-    st.push(2*value-mini);
-        mini=value;}
-     else {
-      st.push(value);}}
+    if(st.isEmpty()){
+    st.push((long)(val));
+    mini=(long)val;
     }
-        
+    else if(val<(int)mini){
+    //this is updated minimum as value of x is  smaller
+    long newval=2*(long)val-mini;
+st.push(newval);
+mini=(long)val;
+    }
+    else {
+    st.push((long)val);
+    }
+    }
+    
+//      if(st.isEmpty()){
+//    st.push(new pair(val,(long)(val)));
+//      }  
+//      else {
+//     st.push(new pair(val,Math.min((long)val,st.peek().second)));
+//      } 
+//     }
     
     public void pop() {
-      if(st.isEmpty()) return;
-     Long val=st.pop();
-    if(val<mini) {
-     mini=2*mini-val;}
+    if(st.isEmpty()) return;
+    long val=st.pop();
+   if(val<mini) {
+mini=2*mini-val;
+   }
     }
     
     public int top() {
-  Long val=st.peek();
-   if(val<mini) 
-       return mini.intValue();
-    else return val.intValue();
-        
+   if(st.isEmpty()) return -1;      
+long val=st.peek();
+if(val<mini) return (int)mini;
+else return (int)val;
     }
     
     public int getMin() {
-       return mini.intValue(); 
+      //  return (int)st.peek().second;
+      return (int)(mini);
     }
 }
 
