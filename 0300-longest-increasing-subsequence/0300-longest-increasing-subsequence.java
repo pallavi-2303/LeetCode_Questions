@@ -20,19 +20,19 @@ int[] pre=new int[n+1];
 int[] curr=new int[n+1];
 for(int i=n-1;i>=0;i--){
  for(int prev=i-1;prev>=-1;prev--){
-  //int nottake=0+dp[i+1][prev+1];
-  int nottake=0+pre[prev+1];
+  int nottake=0+dp[i+1][prev+1];
+ // int nottake=0+pre[prev+1];
   int take=0;
   if(prev==-1 || arr[i]>arr[prev]) {
- // take=1+dp[i+1][i+1];
- take=1+pre[i+1];
+  take=1+dp[i+1][i+1];
+// take=1+pre[i+1];
   }
- // dp[i][prev+1]=Math.max(take,nottake);
- curr[prev+1]=Math.max(take,nottake);
+  dp[i][prev+1]=Math.max(take,nottake);
+ //curr[prev+1]=Math.max(take,nottake);
  }
- pre=curr;
+ //pre=curr;
 }
-//return dp[0][-1+1];
-return pre[0];
+return dp[0][-1+1];
+//return pre[0];
     }
 }
