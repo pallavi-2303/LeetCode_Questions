@@ -1,51 +1,28 @@
 class Solution {
-public boolean subset(int idx,int[] arr,int target,int[][] dp){
-    if(target==0) return true;
-    if(idx==0){
-    if(target==0 || arr[0]==target) return true;
-    return false;
+    public boolean findSubset(int idx,int target,int[] nums,int[][] dp){
+    //base case
+if(target==0) return true;
+if(idx==0)
+return nums[0]==target;
+if(dp[idx][target]!=-1) return dp[idx][target]==1 ? true :false;
+boolean take=false;
+if(nums[idx]<=target){
+take=findSubset(idx-1,target-nums[idx],nums,dp);
+}
+//nottake case
+boolean nottake=findSubset(idx-1,target,nums,dp);
+ dp[idx][target]=(take||nottake) ? 1:0;
+ return take||nottake;
     }
-if(dp[idx][target]!=-1) return dp[idx][target]==0 ? false :true;
-boolean pick=false;
-if(arr[idx]<=target) pick=subset(idx-1,arr,target-arr[idx],dp);
-boolean notpick=subset(idx-1,arr,target,dp);
-dp[idx][target]=pick|notpick==true ? 1:0;
-return pick|notpick;
-}
     public boolean canPartition(int[] nums) {
-     //sum of one part will be sum/2;
-     int total=0;
-     for(int num:nums)  total+=num;
-     int n=nums.length;
-   // if it canot be divided  
-   if(total%2!=0) return false;
-   int target=total/2;
-   boolean[][] dp=new boolean[n][target+1];
-//    for(int[] a:dp) Arrays.fill(a,-1);
-// return subset(n-1,nums,target,dp);
-boolean[] prev=new boolean[target+1];
-for(int i=0;i<n;i++) 
-//dp[i][0]=true;
-prev[0]=true;
-if(nums[0]<=target)
-// dp[0][nums[0]]=true;
-prev[nums[0]]=true;
-for(int i=1;i<n;i++){
-    boolean[] curr=new boolean[target+1];
-    curr[0]=true;
-for(int tar=1;tar<=target;tar++){
-  boolean pick=false;
-if(nums[i]<=tar) 
-//pick=dp[i-1][tar-nums[i]];
-pick=prev[tar-nums[i]];
-//boolean notpick=dp[i-1][tar];
-boolean notpick=prev[tar];
-//dp[i][tar]=pick|notpick;
-curr[tar]=pick|notpick;
-}
-prev=curr.clone();
-}
-//return dp[n-1][target];
-return prev[target];
+   //we can devide an array in subset if and only if sum if even if sum is odd we will not be able to devide in 2 subset
+    int sum=0;
+    int n=nums.length;
+    for(int num:nums) sum+=num;
+    if(sum%2==1)   return false;
+    int target=sum/2;
+int[][] dp=new int[n][target+1];
+for(int[] a:dp) Arrays.fill(a,-1);
+return findSubset(n-1,target,nums,dp);
     }
 }
