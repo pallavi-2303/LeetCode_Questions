@@ -23,16 +23,29 @@ return pick|notpick;
    boolean[][] dp=new boolean[n][target+1];
 //    for(int[] a:dp) Arrays.fill(a,-1);
 // return subset(n-1,nums,target,dp);
-for(int i=0;i<n;i++) dp[i][0]=true;
-if(nums[0]<=target) dp[0][nums[0]]=true;
+boolean[] prev=new boolean[target+1];
+for(int i=0;i<n;i++) 
+//dp[i][0]=true;
+prev[0]=true;
+if(nums[0]<=target)
+// dp[0][nums[0]]=true;
+prev[nums[0]]=true;
 for(int i=1;i<n;i++){
+    boolean[] curr=new boolean[target+1];
+    curr[0]=true;
 for(int tar=1;tar<=target;tar++){
   boolean pick=false;
-if(nums[i]<=tar) pick=dp[i-1][tar-nums[i]];
-boolean notpick=dp[i-1][tar];
-dp[i][tar]=pick|notpick; 
+if(nums[i]<=tar) 
+//pick=dp[i-1][tar-nums[i]];
+pick=prev[tar-nums[i]];
+//boolean notpick=dp[i-1][tar];
+boolean notpick=prev[tar];
+//dp[i][tar]=pick|notpick;
+curr[tar]=pick|notpick;
 }
+prev=curr.clone();
 }
-return dp[n-1][target];
+//return dp[n-1][target];
+return prev[target];
     }
 }
