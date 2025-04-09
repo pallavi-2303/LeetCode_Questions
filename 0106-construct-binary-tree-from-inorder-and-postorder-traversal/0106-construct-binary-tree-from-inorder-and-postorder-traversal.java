@@ -14,24 +14,20 @@
  * }
  */
 class Solution {
- public TreeNode buildTree2(int[] inorder,int inSt,int inEnd,int[] postorder,int postSt,int postEnd,HashMap<Integer,Integer> mp){
-if(inSt>inEnd || postSt>postEnd)
+    public TreeNode inOrder(int is,int ie,int[] inorder,int ps,int pe,int[] postorder,HashMap<Integer,Integer> mp){
+if(is>ie || ps>ps) 
 return null;
-TreeNode root=new TreeNode(postorder[postEnd]);
-//inidx of root in inorder
-int inRootIdx=mp.get(root.val);
-//number of elements that shouold be on left of root
-int left=inRootIdx-inSt;
-root.left=buildTree2(inorder,inSt,inRootIdx-1,postorder,postSt,postSt+left-1,mp);
-root.right=buildTree2(inorder,inRootIdx+1,inEnd,postorder,postSt+left,postEnd-1,mp);
-   return root;}
+TreeNode root=new TreeNode(postorder[pe]);
+int inrootIdx=mp.get(root.val);
+int left=inrootIdx-is;
+root.left=inOrder(is,inrootIdx-1,inorder,ps,ps+left-1,postorder,mp);
+root.right=inOrder(inrootIdx+1,ie,inorder,ps+left,pe-1,postorder,mp);
+return root;}
     public TreeNode buildTree(int[] inorder, int[] postorder) {
- if(inorder.length!=postorder.length){
-   return null;}
-HashMap<Integer,Integer> mp=new HashMap<>();
- int n=inorder.length;
- for(int i=0;i<n;i++){
+     HashMap<Integer,Integer> mp=new HashMap<>();
+int n=inorder.length;
+for(int i=0;i<n;i++){
 mp.put(inorder[i],i);}
-return buildTree2(inorder,0,inorder.length-1,postorder,0,postorder.length-1,mp);
+return inOrder(0,n-1,inorder,0,n-1,postorder,mp);   
     }
 }
