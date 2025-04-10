@@ -1,20 +1,44 @@
 class Solution {
-    public int findSum(int row,int col,int[][] grid,int[][] dp){
-    if(row<0 || col<0) return (int)1e9;
-    if(row==0 && col==0){
-    return grid[0][0];
-    }
-if(dp[row][col]!=-1) return dp[row][col];
-//we have two path either to move up or left
-int up=grid[row][col]+findSum(row-1,col,grid,dp);
-int left=grid[row][col]+findSum(row,col-1,grid,dp);
-return dp[row][col]=Math.min(up,left);
-    }
-    public int minPathSum(int[][] grid) {
-    int n=grid.length;
-    int m=grid[0].length;
-    int[][] dp=new int[n][m];
-    for(int[] a:dp)  Arrays.fill(a,-1);
-    return findSum(n-1,m-1,grid,dp);
+    public int findMinSum(int i,int j,int[][] mat,int[][] dp) {
+ if(i<0 || j<0)
+ return (int)(1e9);
+ if(i==0 && j==0)
+ return mat[0][0];
+ if(dp[i][j]!=-1) return dp[i][j];
+ int up=mat[i][j]+findMinSum(i-1,j,mat,dp);
+ int left=mat[i][j]+findMinSum(i,j-1,mat,dp);
+ return dp[i][j]=Math.min(up,left);
+}
+    public int minPathSum(int[][] mat) {
+      int n=mat.length;
+      int m=mat[0].length;
+      int[][] dp=new int[n][m];
+// for(int[] a:dp)
+// Arrays.fill(a,-1);
+// return findMinSum(n-1,m-1,mat,dp);  
+int[] prev=new int[m];
+int[] curr=new int[m];
+for(int i=0;i<n;i++){
+for(int j=0;j<m;j++){
+if(i==0 && j==0) 
+curr[0]=mat[0][0];
+//dp[i][j]=mat[0][0];
+else {
+int up=(int)(1e9);
+int left=(int)(1e9);
+if(i>0) 
+//up=mat[i][j]+dp[i-1][j];
+up=mat[i][j]+prev[j];
+if(j>0) 
+//left=mat[i][j]+dp[i][j-1];
+left=mat[i][j]+curr[j-1];
+//dp[i][j]=Math.min(up,left);
+curr[j]=Math.min(up,left);
+}
+}
+prev=curr.clone();
+}
+//return dp[n-1][m-1];
+return prev[m-1];
     }
 }
