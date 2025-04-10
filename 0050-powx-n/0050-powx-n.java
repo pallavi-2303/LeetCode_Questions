@@ -4,7 +4,7 @@ class Solution {
    long nn=n;
    if(n<0) nn*=-1;
   while(nn>0) {
-if((nn%2)==1){
+if((nn&1)==1){
 //it is a odd power
 res*=x;
 nn-=1;
