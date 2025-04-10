@@ -13,30 +13,26 @@
  *     }
  * }
  */
- //So in Bst Iterator we generally need to do the inorder traversal
 class BSTIterator {
 Stack<TreeNode> st=new Stack<>();
     public BSTIterator(TreeNode root) {
-      //start the inorder traversal from here 
       pushAll(root);  
     }
     
     public int next() {
-     //it will give the first node of the inorder
      TreeNode temp=st.pop();
-     //push all right of it 
-     pushAll(temp.right);
+     pushAll(temp.right) ;
      return temp.val;  
+    }
+    public void pushAll(TreeNode node){
+    while(node!=null){
+    st.push(node);
+    node=node.left;
+    }
     }
     
     public boolean hasNext() {
-       return !st.isEmpty(); 
-    }
-    public void pushAll(TreeNode root){
-    while(root!=null){
-    st.push(root);
-    root=root.left;
-    }
+      return !st.isEmpty();  
     }
 }
 
