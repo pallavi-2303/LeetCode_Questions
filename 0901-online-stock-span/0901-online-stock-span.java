@@ -1,43 +1,19 @@
-public class pair{
-int first;
-int second;
-public pair(int first,int second){
-this.first=first;
-this.second=second;
-}
-}
 class StockSpanner {
- 
-Stack<pair> st;
-int idx;   
-//List<Integer> ans;
-
+List<Integer> arr=new ArrayList<>();   
     public StockSpanner() {
-   // ans=new ArrayList<>(); 
-    st=new Stack<pair>();
-    idx=-1;
+    arr=new ArrayList<>();
     }
     
     public int next(int price) {
-    //  ans.add(price);
-    //  int count=0;
-    //  int size=ans.size();
-    //  for(int i=size-1;i>=0;i--) {
-    // if(ans.get(i)<=price)
-    //  count++;
-    //  else break;
-    //  }
-    //   return count;
-    idx++;
-    while(!st.isEmpty() && st.peek().first<=price){
-    st.pop();
+    
+arr.add(price);
+int count=0;
+for(int i=arr.size()-1;i>=0;i--){
+if(arr.get(i)<=price) {
+count++;}
+else break;}
+return count;  
     }
-  int pge=st.isEmpty() ? -1 : st.peek().second;
-st.push(new pair(price,idx));
-int count=(idx-pge);
-return count;
-    }
-   
 }
 
 /**
