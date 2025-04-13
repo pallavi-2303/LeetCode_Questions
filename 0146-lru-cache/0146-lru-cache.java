@@ -1,67 +1,65 @@
 class LRUCache {
 Node head=new Node(0,0);
 Node tail=new Node(0,0);
-HashMap<Integer,Node> mp=new HashMap<>();
 int capacity;
+HashMap<Integer,Node> mp=new HashMap<>();
     public LRUCache(int capacity) {
       this.capacity=capacity;
-      tail.prev=head;
-      head.next=tail;  
+      head.next=tail;
+      tail.prev=head;  
     }
-    public void deleteTheNode(Node node){
-    Node nextNode=node.next;
-    Node prevNode=node.prev;
-    //we have to delte the articular node 
-    nextNode.prev=prevNode;
-    prevNode.next=nextNode;
-    }
+   public void deleteNode(Node node) {
+Node nextNode=node.next;
+Node prevNode=node.prev;
+nextNode.prev=prevNode;
+prevNode.next=nextNode;
+   }
 public void insertAfterHead(Node node){
-   Node afterHead=head.next;
-   head.next=node;
-   node.prev=head;
-   node.next=afterHead;
-   afterHead.prev=node; 
-    }
+Node headNext=head.next;
+node.next=headNext;
+head.next=node;
+node.prev=head;
+headNext.prev=node;
+}
     public int get(int key) {
-//if key is not present in the map
-if(!mp.containsKey(key)) {
-return -1;
-}  
-//if key is present in map
- Node node=mp.get(key); //it will give its value
- deleteTheNode(node);
- insertAfterHead(node);
-return node.value;
+     //if the key if not present in map
+     if(!mp.containsKey(key)) return -1;
+     Node node=mp.get(key);
+     deleteNode(node);
+     insertAfterHead(node);
+     return node.value; 
     }
     
     public void put(int key, int value) {
-    //first case if the key is already present then just update its value
+    //if the key is already present in map just update its value
    if(mp.containsKey(key)){
-    Node node=mp.get(key);
-    node.value=value;
-    mp.put(key,node);
-deleteTheNode(node);
- insertAfterHead(node);
+Node node=mp.get(key);
+node.value=value;
+mp.put(key,node);
+deleteNode(node); 
+insertAfterHead(node);
    }
    else {
+//if size == capacity  delte the last node
 if(mp.size()==capacity){
-Node node=tail.prev;
-//we have to remove this node
-deleteTheNode(node);
-mp.remove(node.key);
+Node tailprev=tail.prev;
+//delte this nnode
+deleteNode(tailprev);
+mp.remove(tailprev.key);
 }
-//Now ew have to pput this
-Node node=new Node(key,value);
-mp.put(key,node);
-insertAfterHead(node);//it is the recnt node
+//the node is delte if size is full now insert the new node
+Node newNode=new Node(key,value);
+mp.put(key,newNode);
+insertAfterHead(newNode);
    }
+
     }
-//let just first create the class of Node
 public class Node{
-    Node prev;
-    Node next;
-int key,value;
-public Node(int key,int value){
+Node prev;
+Node next;
+int key;
+int value;
+Node(int key,int value){
 this.key=key;
 this.value=value;
 }
