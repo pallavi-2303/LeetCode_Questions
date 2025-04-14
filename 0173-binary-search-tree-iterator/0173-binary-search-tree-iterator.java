@@ -20,19 +20,19 @@ Stack<TreeNode> st=new Stack<>();
     }
     
     public int next() {
-     TreeNode temp=st.pop();
-     pushAll(temp.right) ;
-     return temp.val;  
-    }
-    public void pushAll(TreeNode node){
-    while(node!=null){
-    st.push(node);
-    node=node.left;
-    }
+    TreeNode top=st.pop();
+    pushAll(top.right);
+    return top.val;  
     }
     
     public boolean hasNext() {
-      return !st.isEmpty();  
+     return !st.isEmpty();   
+    }
+    public void pushAll(TreeNode root){
+    while(root!=null){
+    st.push(root);
+    root=root.left;
+    }
     }
 }
 
