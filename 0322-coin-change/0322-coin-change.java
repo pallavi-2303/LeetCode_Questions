@@ -22,29 +22,39 @@ Math.min(take,nottake);
 }
 public int tabulation(int[] nums,int target){
 int n=nums.length;
-int[][] dp=new int[n][target+1];
+//int[][] dp=new int[n][target+1];
+int[] prev=new int[target+1];
+int[] curr=new int[target+1];
 for(int tar=0;tar<=target;tar++){
 if(tar%nums[0]==0){
-dp[0][tar]=tar/nums[0];
+//dp[0][tar]=tar/nums[0];
+prev[tar]=tar/nums[0];
 }
 else {
-dp[0][tar]=(int)1e9;
+//dp[0][tar]=(int)1e9;
+prev[tar]=(int)1e9;
 }
 }
 for(int i=0;i<n;i++){
-dp[i][0]=0;
+//dp[i][0]=0;
+prev[0]=0;
 }
 for(int i=1;i<n;i++){
 for(int tar=0;tar<=target;tar++){
 int take=(int)1e9;
 if(nums[i]<=tar){
-take=1+dp[i][tar-nums[i]];
+//take=1+dp[i][tar-nums[i]];
+take=1+curr[tar-nums[i]];
 }
-int nottake=0+dp[i-1][tar];
-dp[i][tar]=Math.min(take,nottake);
+//int nottake=0+dp[i-1][tar];
+int nottake=0+prev[tar];
+//dp[i][tar]=Math.min(take,nottake);
+curr[tar]=Math.min(take,nottake);
 }
+prev=curr.clone();
 }
-return dp[n-1][target];
+//return dp[n-1][target];
+return prev[target];
 }
     public int coinChange(int[] coins, int amount) {
        int n=coins.length;
