@@ -1,26 +1,20 @@
 class KthLargest {
-class pair{
-int num;
+PriorityQueue<Integer> pq;
 int k;
-pair(int num,int k){
-this.num=num;
-this.k=k;
-}
-}
-PriorityQueue<pair> pq;
     public KthLargest(int k, int[] nums) {
-     pq=new PriorityQueue<pair>((x,y)->x.num-y.num);
-     for(int num:nums){
-    pq.add(new pair(num,k));
-     }   
+      pq=new PriorityQueue<Integer>((x,y)->x-y);
+      this.k=k;
+      for(int num:nums) {
+    add(num);
+      }
     }
     
     public int add(int val) {
-if(pq.isEmpty()) return -1;
-  int K=pq.peek().k;
-     pq.add(new pair(val,K));
-     while(!pq.isEmpty() && pq.size()>K) pq.poll();
-     return pq.peek().num; 
+    pq.add(val) ;
+    while(!pq.isEmpty() && pq.size()>k) {
+    pq.poll();
+    }
+    return pq.peek();
     }
 }
 
