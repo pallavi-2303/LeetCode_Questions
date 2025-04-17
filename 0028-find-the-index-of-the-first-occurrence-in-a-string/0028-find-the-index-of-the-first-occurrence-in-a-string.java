@@ -1,60 +1,53 @@
 class Solution {
-    public void findLPS(String s,int[] lps) {
-int prefix=0;
-int suffix=1;
+    public void findLPS(int[] lps,String s) {
+lps[0]=0;
 int n=s.length();
-while(suffix<n) {
-if(s.charAt(prefix)==s.charAt(suffix))     {
- lps[suffix]=prefix+1;
- prefix++;
- suffix++;
+int len=0;
+int i=1;
+while(i<n) {
+if(s.charAt(i)==s.charAt(len)) {
+len++;
+lps[i]=len;
+i++;
 }
 else {
-if(prefix==0){
- lps[suffix]=0;
- suffix++;
+if(len!=0){
+len=lps[len-1];
 }
 else {
- prefix=lps[prefix-1];
+lps[i]=0;
+i++;
 }
 }
-}
-}
-    public int strStr(String s, String t) {
-      //brute force apparoch
-    //   int n=haystack.length();
-    //   int m=needle.length();
-    //   for(int i=0;i<=(n-m);i++) {
-    // String str=haystack.substring(i,i+m);
-    // if(str.equals(needle)){
-    // return i;
-    // }
-    //   }
-    //   return -1;
-  //  return haystack.indexOf(needle);
-
-  int n=s.length();
-int m=t.length();
+}}
+    public int strStr(String s, String pattern) {
+    int ans=-1;
+int n=s.length();
+int m=pattern.length();
+if(m>n) return -1;
 int[] lps=new int[m];
-int first=0;
-int second=0;
-findLPS(t,lps);
-while(first<n && second<m) {
-if(s.charAt(first)==t.charAt(second)) {
- first++;
- second++;
+findLPS(lps,pattern);
+int i=0;
+int j=0;
+while(i<n) {
+if(s.charAt(i)==pattern.charAt(j)){
+i++;
+j++;
+}
+if(j==m) {
+ans=i-j;
+break;
+//j=lps[j-1];
+}
+else if(i< n && s.charAt(i)!=pattern.charAt(j)) {
+if(j!=0) {
+j=lps[j-1];
 }
 else {
-if(second==0){
-//still its not matching 
-first++;
-}
-else {
-//look for previous mathched character so that we don't have to travel from start 
- second=lps[second-1];
+i++;
 }
 }
 }
-return second==m ? first-second :-1;
+return ans;
     }
 }
