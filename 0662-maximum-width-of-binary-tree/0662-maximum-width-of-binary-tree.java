@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-public class pair{
+    public class pair{
 TreeNode node;
 int index;
 public pair(TreeNode node,int index){
@@ -23,33 +23,31 @@ this.index=index;
 }
 }
     public int widthOfBinaryTree(TreeNode root) {
-     if(root==null) return 0;
-    Queue<pair> q=new LinkedList<>();
-    //Adding the 0th node at first to reduce the over flow  stuff we will try to subtract the minimum index of each elevel from that node
+       Queue<pair> q=new LinkedList<>();
+if(root==null) return 0;
 q.add(new pair(root,0));
 int maxi=Integer.MIN_VALUE;
-while(!q.isEmpty()){
-int size=q.size();
-//find the minimum index for that level before doing traversal for thatt lavel
-int mini=q.peek().index;
+while(!q.isEmpty()) {
+int min=q.peek().index;
 int firstIdx=-1;
 int lastIdx=-1;
-for(int i=1;i<=size;i++)  {
+int size=q.size();
+for(int i=0;i<size;i++){
 pair it=q.poll();
-TreeNode node=it.node;
 int index=it.index;
-int currIdx=index-mini;
-if(i==1) firstIdx=currIdx;
-if(i==size) lastIdx=currIdx;
-if(node.left!=null){
-    q.add(new pair(node.left,2*currIdx+1));
+TreeNode curr=it.node;
+int currIdx=index-min;
+if(i==0) firstIdx=currIdx;
+if(i==size-1) lastIdx=currIdx;
+if(curr.left!=null) {
+q.add(new pair(curr.left,2*currIdx+1));
 }
-if(node.right!=null){
-    q.add(new pair(node.right,2*currIdx+2));
-}
+if(curr.right!=null) {
+q.add(new pair(curr.right,2*currIdx+2));
 }
 maxi=Math.max(maxi,lastIdx-firstIdx+1);
 }
-return maxi;
+}
+return maxi; 
     }
 }
