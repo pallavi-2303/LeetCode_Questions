@@ -1,21 +1,26 @@
 class Solution {
+    public int findWord(int idx,String s,int[] dp, HashSet<String> st) {
+if(idx==s.length()) {
+//the string is exhausted and it is found
+return 1;
+}
+if(st.contains(s)) return 1;
+if(dp[idx]!=-1) return dp[idx];
+for(int len=1;len+idx<=s.length();len++){
+if(st.contains(s.substring(idx,idx+len)) && (findWord(idx+len,s,dp,st))==1) {
+return dp[idx]=1;
+}
+}
+return dp[idx]=0;//if the loop break and answer not found 
+}
     public boolean wordBreak(String s, List<String> wordDict) {
-       int n=s.length();
-boolean[] dp=new boolean[n+1];
-HashSet<String> st=new HashSet<>(wordDict);
-int maxlen=0;
-for(String str:st) {
-maxlen=Math.max(maxlen,str.length());
+    
+HashSet<String> st=new HashSet<>();
+for(String str:wordDict){
+st.add(str);
 }
-dp[0]=true;
-for(int i=1;i<=n;i++){
-for(int j=i-1;j>=Math.max(0,i-maxlen);j--){
-if(dp[j] && st.contains(s.substring(j,i))) {
-dp[i]=true;
-break;
-}
-}
-}
-return dp[n]; 
+int[] dp=new int[s.length()];
+Arrays.fill(dp,-1);
+return findWord(0,s,dp,st)==1 ? true : false;   
     }
 }
