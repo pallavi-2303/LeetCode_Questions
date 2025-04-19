@@ -9,24 +9,31 @@
  * }
  */
 class Solution {
-    public ListNode mergeKLists(ListNode[] lists) {
-     if(lists==null || lists.length==0)   return null;
-     PriorityQueue<ListNode> pq=new PriorityQueue<>((x,y)->Integer.compare(x.val,y.val));
-     for(ListNode node:lists){
-    if(node!=null){
-    pq.offer(node);
+    public ListNode merge(ListNode left,ListNode right){
+    ListNode dummy=new ListNode(0);
+    ListNode  temp=dummy;
+    while(left!=null && right!=null){
+    if(left.val<=right.val){
+    temp.next=left;
+    left=left.next;
     }
-     }
-     ListNode dummy=new ListNode(0);
-     ListNode temp=dummy;
-     while(!pq.isEmpty()){
-    ListNode curr=pq.poll();
-     if(curr.next!=null){
-     pq.offer(curr.next);
+    else {
+    temp.next=right;
+    right=right.next;
     }
-    temp.next=curr;
-    temp=curr;
-     }
+    temp=temp.next;
+    }
+if(left==null) temp.next=right;
+else temp.next=left;
 return dummy.next;
+    }
+    public ListNode mergeKLists(ListNode[] lists) {
+     if(lists.length==0) return null;
+    ListNode head=lists[0];
+    int n=lists.length;
+    for(int i=1;i<n;i++) {
+    head=merge(head,lists[i]);
+    } 
+    return head; 
     }
 }
