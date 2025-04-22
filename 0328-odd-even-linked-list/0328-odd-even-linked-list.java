@@ -10,23 +10,21 @@
  */
 class Solution {
     public ListNode oddEvenList(ListNode head) {
-    //we need to take Two dummy pointer 
+      ListNode even=new ListNode(0);
 ListNode odd=new ListNode(0);
-ListNode even=new ListNode(0);
-//we also need temp pinter that will travel on node
 ListNode tempo=odd;
 ListNode tempe=even;
 ListNode temp=head;
 while(temp!=null){
+//first connect odd and then even
 tempo.next=temp;
-tempo=temp;
+tempo=tempo.next;
 temp=temp.next;
 tempe.next=temp;
-tempe=temp;
-if(temp!=null) temp=temp.next;
-}
-even=even.next;
-tempo.next=even;
-return odd.next;
+tempe=tempe.next;
+if(temp!=null)
+temp=temp.next;}
+tempo.next=even.next;
+return odd.next;  
     }
 }
