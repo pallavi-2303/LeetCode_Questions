@@ -24,7 +24,7 @@ int low=0;
 int high=m-1;
 while(low<=high){
 int mid=low+(high-low)/2;
-long product=(long)(potions[mid]*spells[i]);
+long product=((long)potions[mid]*(long)spells[i]);
 if(product>=success){
 high=mid-1;}
 else {
