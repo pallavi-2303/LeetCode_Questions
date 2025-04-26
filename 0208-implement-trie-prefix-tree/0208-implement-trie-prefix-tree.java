@@ -1,64 +1,63 @@
-public class Node {
- Node[] links=new Node[26];
- boolean flag=false;
- public boolean contains(char ch){
- return links[ch-'a']!=null;
- }
- public void put(char ch,Node node){
-links[ch-'a']=node;
- }
- public boolean eow() {
- return flag;
- }
- public void setEOW() {
- flag=true;
- }
- public Node get(char ch){
- return links[ch-'a'];
- }
+class Node{
+Node[] links=new Node[26];
+boolean eow=false;
+public boolean containsKey(char ch){
+return links[ch-'a']!=null;
 }
-
+public Node get(char ch){
+return links[ch-'a'];
+}
+public void put(char ch,Node node){
+links[ch-'a']=node;
+}
+public boolean eow(){
+return eow;
+}
+public void seteow(){
+eow=true;
+}
+}
 class Trie {
-private static Node root;
+Node root;
     public Trie() {
-      root=new Node() ; 
+       root=new Node(); 
     }
     
     public void insert(String word) {
-        //insert word function
-Node node=root;
-for(int i=0;i<word.length();i++){
- if(!node.contains(word.charAt(i))){
- node.put(word.charAt(i),new Node());
- }   
- node=node.get(word.charAt(i));
-}
-node.setEOW();
+       Node node=root;
+       for(char ch:word.toCharArray()){
+    if(!node.containsKey(ch)){
+    node.put(ch,new Node());
+    }
+    node=node.get(ch);
+       } 
+       node.seteow();
     }
     
     public boolean search(String word) {
-      //search a word
-Node node=root;
-int n=word.length();
-for(int i=0;i<n;i++){
-if(!node.contains(word.charAt(i))) {
- return false;
+    Node node=root;
+for(char ch:word.toCharArray()){
+if(!node.containsKey(ch)){
+return false;
 }
-node=node.get(word.charAt(i));
+else {
+node=node.get(ch);
 }
+}  
 return node.eow();  
     }
     
     public boolean startsWith(String prefix) {
-        //prefix search
-Node node=root;
-for(int i=0;i<prefix.length();i++){
-if(!node.contains(prefix.charAt(i))){
- return false;
+         Node node=root;
+for(char ch:prefix.toCharArray()){
+if(!node.containsKey(ch)){
+return false;
 }
-node=node.get(prefix.charAt(i));
+else {
+node=node.get(ch);
 }
-return true;
+}  
+return true;  
     }
 }
 
