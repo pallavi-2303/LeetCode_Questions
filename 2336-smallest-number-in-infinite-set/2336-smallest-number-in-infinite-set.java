@@ -1,33 +1,33 @@
 class SmallestInfiniteSet {
-    boolean[] arr;
-    int i;
-
+//since we have to track the smallest elelemnt we can use PriorityQueue and no two same element added in we need set
+PriorityQueue<Integer> pq;
+HashSet<Integer> st;
+int current;
     public SmallestInfiniteSet() {
-        arr = new boolean[1000 + 1];
-        Arrays.fill(arr, true);
-        i = 1;
+       pq=new PriorityQueue<>((a,b)->Integer.compare(a,b)); 
+       st=new HashSet<>();
+       current=1;
     }
-
+    
     public int popSmallest() {
-        int result = i;
-        arr[i] = false;
-        for (int j = i + 1; j <= 1000; j++) {
-            if (arr[j] == true) {
-                i = j;
-                break;
-            }
-        }
-        return result;
+      //if priotiryty Queue is not empty 
+      int result;
+      if(!pq.isEmpty()){
+    result=pq.poll();
+    st.remove(result);
+      } 
+      else  {
+    result=current;
+    current++;
+      }
+      return result; 
     }
-
+    
     public void addBack(int num) {
-        //only add back if it was popped 
-        if(!arr[num]){
-        arr[num]=true;
-        if(num<i)
-        i=num;
-        }
-       
+     if(num>=current || st.contains(num)) return;
+     //if it is smaller elelelemnt
+     pq.add(num);
+     st.add(num);  
     }
 }
 
