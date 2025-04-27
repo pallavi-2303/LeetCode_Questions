@@ -1,43 +1,30 @@
-public class pair{
-int first;
-int second;
-public pair(int first,int second){
-this.first=first;
-this.second=second;
-}
-}
 class StockSpanner {
- 
+class pair{
+int ele;
+int index;
+pair(int ele,int index){
+this.ele=ele;
+this.index=index;
+}
+}
+//we have to find out the prices that is less than or equalt  to current day
 Stack<pair> st;
-int idx;   
-//List<Integer> ans;
-
+int idx;
     public StockSpanner() {
-   // ans=new ArrayList<>(); 
-    st=new Stack<pair>();
-    idx=-1;
+    st=new Stack<>();
+idx=-1;
     }
     
     public int next(int price) {
-    //  ans.add(price);
-    //  int count=0;
-    //  int size=ans.size();
-    //  for(int i=size-1;i>=0;i--) {
-    // if(ans.get(i)<=price)
-    //  count++;
-    //  else break;
-    //  }
-    //   return count;
-    idx++;
-    while(!st.isEmpty() && st.peek().first<=price){
+        idx++;
+    while(!st.isEmpty() && st.peek().ele<=price) {
     st.pop();
-    }
-  int pge=st.isEmpty() ? -1 : st.peek().second;
+    } 
+int pge=st.isEmpty() ? -1 :st.peek().index;
+int count=idx-pge;
 st.push(new pair(price,idx));
-int count=(idx-pge);
 return count;
     }
-   
 }
 
 /**
