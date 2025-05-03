@@ -1,22 +1,20 @@
 class Solution {
-public void findCombiation(int idx,String digits,String[] kp,List<String> ans,String res){
-if(idx==digits.length()){
-ans.add(res);
-return;
-}
-int currDigit=digits.charAt(idx)-'0';
-String currDigitString=kp[currDigit];
-//try all character for current digit
-for(int i=0;i<currDigitString.length();i++){
-findCombiation(idx+1,digits,kp,ans,res+currDigitString.charAt(i));
-}
-}
+    public void findAllPath(String digits,int idx,String path,List<String> res,String[] kp){
+//Base case when to add in answer
+if(path.length()==digits.length()){
+res.add(path);
+return;}
+//find the current digit
+int  charIdx=digits.charAt(idx)-'0';
+String options=kp[charIdx];
+for(int i=0;i<options.length();i++){
+findAllPath(digits,idx+1,path+options.charAt(i),res,kp);}}
     public List<String> letterCombinations(String digits) {
-     int n=digits.length();
-     List<String> ans=new ArrayList<>();
-     if(n==0) return ans;
+        
+        List<String> ans=new ArrayList<>();
+        if(digits.length()==0) return ans;
 String[] kp={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-findCombiation(0,digits,kp,ans,"");
+findAllPath(digits,0,"",ans,kp);
 return ans;
     }
 }
