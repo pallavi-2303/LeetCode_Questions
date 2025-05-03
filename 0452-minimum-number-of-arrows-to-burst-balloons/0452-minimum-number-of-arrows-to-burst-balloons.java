@@ -7,7 +7,7 @@ return Integer.compare(a[1],b[1]);
     public int findMinArrowShots(int[][] points) {
      
 Arrays.sort(points,new sortComparator());
-List<List<Integer>> res=new ArrayList<>();
+//List<List<Integer>> res=new ArrayList<>();
 int n=points.length;
 int arrow=1;
 int preEnd=points[0][1];
