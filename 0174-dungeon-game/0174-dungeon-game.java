@@ -1,39 +1,23 @@
 class Solution {
 int n;
 int m;
-HashMap<String,Boolean> mp;
-public boolean canReach(int health,int[][] dungeon,int i,int j){
-if(i>=n || j>=m) return false;
-health+=dungeon[i][j];
-if(health<=0) return  false;
-if(i==n-1 && j==m-1) return true;
-String curr=i+"_"+j+"_"+health;
-if(mp.containsKey(curr)){
-return mp.get(curr);
+int[][] dp=new int[201][201];
+public int solve(int i,int j,int[][] dungeon){
+if(i>=n || j>=m) return (int)1e9;
+if(i==n-1 && j==m-1){
+if(dungeon[i][j]>0) return 1;//min value the adjcaent cell should have to reach the queen
+else return Math.abs(dungeon[i][j])+1;
 }
-boolean reach=canReach(health,dungeon,i+1,j) || canReach(health,dungeon,i,j+1);
-mp.put(curr,reach);
-return reach;
+if(dp[i][j]!=-1) return dp[i][j];
+int right=solve(i,j+1,dungeon);
+int down=solve(i+1,j,dungeon);
+int result=Math.min(right,down)-dungeon[i][j];//min value that the adjacent ceell shoud have to rreach the queen
+return dp[i][j]=result>0 ? result :1;
 }
     public int calculateMinimumHP(int[][] dungeon) {
-    //brute force aproch of binary search
-n=dungeon.length;
-m=dungeon[0].length;
-int low=1;
-int high=4*(int)1e7;
-int result=high;
-mp=new HashMap<>();
-while(low<=high){
-int mid=low+(high-low)/2;
-mp.clear();
-if(canReach(mid,dungeon,0,0)){
-result=mid;
-high=mid-1;
-}
-else{
-low=mid+1;
-}
-}
-return result;
+    n=dungeon.length;
+    m=dungeon[0].length;
+    for(int[] a:dp) Arrays.fill(a,-1);
+    return solve(0,0,dungeon);
     }
 }
