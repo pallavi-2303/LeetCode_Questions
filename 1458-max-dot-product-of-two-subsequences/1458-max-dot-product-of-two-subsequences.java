@@ -5,7 +5,7 @@ int m=nums2.length;
 //base case
 if(i==n || j==m) {
 //out of bound case
-return -(int)1e9;
+return 1;
 }
 if(dp[i][j]!=-1) return dp[i][j];
 int val=nums1[i]*nums2[j];
