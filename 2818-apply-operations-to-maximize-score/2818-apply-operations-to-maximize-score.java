@@ -1,89 +1,117 @@
-class Solution {
-   private static final long MOD = 1000000007;
+public class Solution {
+    int n;
+    int M = (int) 1e9 + 7;
 
-private void calculateScore(int[] nums, List<Long> score) {
-    for (int ele : nums) {
-        long count = 0;
-        int num = ele;
-        for (int i = 2; i * i <= num; ++i) {
-            if (num % i == 0) {
-                count++;
-                while (num % i == 0) {
-                    num /= i;
+    public int[] nextGreater(int[] nums) {
+        n = nums.length;
+        int[] nge = new int[n];
+        Stack<Integer> st = new Stack<>();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!st.isEmpty() && nums[st.peek()] <= nums[i]) {
+                st.pop();
+            }
+            nge[i] = st.isEmpty() ? n : st.peek();
+            st.push(i);
+        }
+        return nge;
+    }
+
+    public int[] prevGreater(int[] nums) {
+        n = nums.length;
+        int[] pge = new int[n];
+        Stack<Integer> st = new Stack<>();
+        for (int i = 0; i < n; i++) {
+            while (!st.isEmpty() && nums[st.peek()] < nums[i]) {
+                st.pop();
+            }
+            pge[i] = st.isEmpty() ? -1 : st.peek();
+            st.push(i);
+        }
+        return pge;
+    }
+
+    public long findPower(long a, long b) {
+        long result = 1;
+        a = a % M;
+        while (b > 0) {
+            if (b % 2 == 1) {
+                result = (result * a) % M;
+                b--;
+            } else {
+                a = (a * a) % M;
+                b /= 2;
+            }
+        }
+        return result;
+    }
+
+    public List<Integer> findPrimes(int limit) {
+        boolean[] isPrime = new boolean[limit + 1];
+        List<Integer> primes = new ArrayList<>();
+        Arrays.fill(isPrime, true);
+        for (int i = 2; i * i <= limit; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= limit; j += i) {
+                    isPrime[j] = false;
                 }
             }
         }
-        if (num > 1) count++;
-        score.add(count);
-    }
-}
-
-private void calculateSubarrayCountPerScore(List<Long> score, long[] subarrayCount) {
-    int n = score.size();
-    int[] pge = new int[n];
-    Arrays.fill(pge, -1);
-    Deque<Integer> stack = new ArrayDeque<>();
-
-    for (int i = 0; i < n; ++i) {
-        while (!stack.isEmpty() && score.get(stack.peek()) < score.get(i)) {
-            stack.pop();
+        for (int i = 2; i <= limit; i++) {
+            if (isPrime[i]) {
+                primes.add(i);
+            }
         }
-        if (!stack.isEmpty()) {
-            pge[i] = stack.peek();
+        return primes;
+    }
+
+    public int[] primeScores(List<Integer> nums) {
+        n = nums.size();
+        int maxEle = Collections.max(nums);
+        int[] primeScores = new int[n];
+        List<Integer> primes = findPrimes(maxEle);
+        for (int i = 0; i < n; i++) {
+            int num = nums.get(i);
+            for (int prime : primes) {
+                if (prime * prime > num) break;
+                if (num % prime != 0) continue;
+                primeScores[i]++;
+                while (num % prime == 0) {
+                    num /= prime;
+                }
+            }
+            if (num > 1) primeScores[i]++;
         }
-        stack.push(i);
+        return primeScores;
     }
 
-    stack.clear();
-    for (int i = n - 1; i >= 0; --i) {
-        while (!stack.isEmpty() && score.get(stack.peek()) <= score.get(i)) {
-            stack.pop();
+    public int maximumScore(List<Integer> nums, int k) {
+        n = nums.size();
+        int[] primeScores = primeScores(nums);
+        int[] pge = prevGreater(primeScores);
+        int[] nge = nextGreater(primeScores);
+
+        List<int[]> sortedArr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            sortedArr.add(new int[]{nums.get(i), i});
         }
-        int nge = stack.isEmpty() ? n : stack.peek();
-        long count = (long) (nge - i) * (i - pge[i]);
-        subarrayCount[i] = count;
-        stack.push(i);
-    }
-}
 
-private long binaryExponentiation(long a, long b) {
-    long res = 1;
-    a %= MOD;
-    while (b > 0) {
-        if ((b & 1) == 1) {
-            res = (res * a) % MOD;
+        sortedArr.sort((a, b) -> Integer.compare(b[0], a[0]));
+
+        long result = 1;
+        int idx = 0;
+
+        while (k > 0 && idx < n) {
+            int Ele = sortedArr.get(idx)[0];
+            int index = sortedArr.get(idx)[1];
+            long left = index - pge[index];
+            long right = nge[index] - index;
+            long subarrayCount = left * right;
+            long use = Math.min(k, subarrayCount);
+            result = (result * findPower(Ele, use)) % M;
+            k -= use;
+            idx++;
         }
-        a = (a * a) % MOD;
-        b >>= 1;
-    }
-    return res;
-}
 
-public int maximumScore(List<Integer> nums, int k) {
-    int n = nums.size();
-    List<Long> score = new ArrayList<>();
-    int[] numArray = nums.stream().mapToInt(i -> i).toArray();
-    calculateScore(numArray, score);
-
-    long[] subarrayCount = new long[n];
-    calculateSubarrayCountPerScore(score, subarrayCount);
-
-    PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> Integer.compare(b[0], a[0]));
-    for (int i = 0; i < n; ++i) {
-        maxHeap.offer(new int[]{numArray[i], i});
-    }
-
-    long res = 1;
-    while (k > 0 && !maxHeap.isEmpty()) {
-        int[] curr = maxHeap.poll();
-        int num = curr[0];
-        int idx = curr[1];
-        long cnt = Math.min(k, subarrayCount[idx]);
-        res = (res * binaryExponentiation(num, cnt)) % MOD;
-        k -= cnt;
-        if (k == 0) break;
-    }
-    return (int) res;
-        
+        return (int) result;
     }
 }
