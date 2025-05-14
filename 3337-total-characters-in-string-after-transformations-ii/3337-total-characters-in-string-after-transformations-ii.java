@@ -1,75 +1,62 @@
-public class Solution {
-    private static final int MOD = 1_000_000_007;
-    private static final int SIZE = 26;
+class Solution {
+private int size=26;
+private int M=(int)1e9+7;
+    public int[][] matrixMultiplication(int[][] a,int[][] b){
+int[][] res=new int[size][size];
+for(int i=0;i<size;i++){
+for(int j=0;j<size;j++){
+long sum=0;
+for(int k=0;k<size;k++){
+sum = (sum+1L*a[i][k]*b[k][j])%M;
 
-    // Matrix multiplication using 2D array
-    private int[][] matrixMultiplication(int[][] A, int[][] B) {
-        int[][] result = new int[SIZE][SIZE];
-        for (int i = 0; i < SIZE; ++i) {
-            for (int j = 0; j < SIZE; ++j) {
-                long sum = 0;
-                for (int k = 0; k < SIZE; ++k) {
-                    sum = (sum + 1L * A[i][k] * B[k][j]) % MOD;
-                }
-                result[i][j] = (int) sum;
-            }
-        }
-        return result;
-    }
-
-    // Matrix exponentiation using 2D array
-    private int[][] matrixExponentiation(int[][] base, int exponent) {
-        int[][] identity = new int[SIZE][SIZE];
-        for (int i = 0; i < SIZE; i++) {
-            identity[i][i] = 1;
-        }
-
-        if (exponent == 0) return identity;
-
-        int[][] half = matrixExponentiation(base, exponent / 2);
-        int[][] result = matrixMultiplication(half, half);
-
-        if (exponent % 2 == 1) {
-            result = matrixMultiplication(result, base);
-        }
-
-        return result;
-    }
-
+}
+res[i][j]=(int)sum;
+}
+}
+return res;
+}
+public int[][] matrixExponent(int[][] base,int exponent){
+int[][] identity=new int[size][size];
+for(int i=0;i<26;i++){
+identity[i][i]=1;
+}
+if(exponent==0) return identity;
+int[][] half=matrixExponent(base,exponent/2);
+int[][] result=matrixMultiplication(half,half);
+if(exponent%2==1){
+result=matrixMultiplication(result,base);
+}
+return result;
+}
     public int lengthAfterTransformations(String s, int t, List<Integer> nums) {
-        int[] freq = new int[SIZE];
-        for (char ch : s.toCharArray()) {
-            freq[ch - 'a']++;
-        }
+       int[] freq=new int[size];
+for(char ch:s.toCharArray()){
+freq[ch-'a']++;
+}
+//if we want to find final frequency we can find by fq=(T,t)*inialfreq
+int[][] T=new int[size][size];
+//making initial T matrix
+for(int i=0;i<size;i++){
+for(int add=1;add<=nums.get(i);add++){
+int newIdx=(i+add)%size;
+T[newIdx][i]=(T[newIdx][i]+1)%M;
+}
+}
+int[][] result=matrixExponent(T,t);
+//now to get final frequency array we have to multiply result to initial freq
 
-        // Build transformation matrix T
-        int[][] T = new int[SIZE][SIZE];
-        for (int i = 0; i < SIZE; ++i) {
-            for (int add = 1; add <= nums.get(i); ++add) {
-                int newIndex = (i + add) % SIZE;
-                T[newIndex][i] = (T[newIndex][i] + 1) % MOD;
-            }
-        }
-
-        // Matrix exponentiation
-        int[][] result = matrixExponentiation(T, t);
-
-        // Apply transformation to frequency vector
-        int[] updatedFreq = new int[SIZE];
-        for (int i = 0; i < SIZE; ++i) {
-            long value = 0;
-            for (int j = 0; j < SIZE; ++j) {
-                value = (value + 1L * result[i][j] * freq[j]) % MOD;
-            }
-            updatedFreq[i] = (int) value;
-        }
-
-        // Compute final length
-        int resultLength = 0;
-        for (int val : updatedFreq) {
-            resultLength = (resultLength + val) % MOD;
-        }
-
-        return resultLength;
+int[] updatedFreq=new int[26];
+for(int i=0;i<size;i++){
+long val=0;
+for(int j=0;j<size;j++){
+val=(val+1L*result[i][j]*freq[j])%M;
+}
+updatedFreq[i]=(int)val;
+}
+int totalFreq=0;
+for(int fre:updatedFreq){
+totalFreq=(totalFreq+fre)%M;
+}
+return totalFreq; 
     }
 }
