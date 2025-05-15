@@ -1,22 +1,22 @@
 class Solution {
     public int searchInsert(int[] nums, int target) {
-      //we have to found the first position where element owould be present if it is not present first index it will be there
-    int n=nums.length;
-    int ans=n;
-    int low=0;
-    int high=n-1;
+     int n=nums.length;
+     int low=0;
+     int high=n-1;
+     int ans=n;
     while(low<=high) {
-    int mid=low+(high-low);
+    int mid=low+(high-low)/2;
     if(nums[mid]==target){
-        return mid;
+    return mid;
     }
     else if(nums[mid]<target){
-        low=mid+1;
+    low=mid+1;
     }
     else {
-ans=mid;
-high=mid-1;
-    }}
+    ans=mid;
+    high=mid-1;
+    }
+    }  
     return ans;
     }
 }
