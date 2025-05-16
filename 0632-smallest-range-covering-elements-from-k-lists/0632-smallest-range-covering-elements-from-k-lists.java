@@ -7,10 +7,12 @@ PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->Integer.compare(a[0],b[0]));
 int k=nums.size();
 int[] range={-100000,100000};
 int maxElement=Integer.MIN_VALUE;
+//TC-> k*logk logk for pq insertion
 for(int i=0;i<k;i++){
 pq.add(new int[]{nums.get(i).get(0),0,i});
 maxElement=Math.max(maxElement,nums.get(i).get(0));
 }
+//TC-> n*logk n is number of elemnt  min of all size lt n*logk sc->0(k)
 while(!pq.isEmpty()){
 int[] it=pq.poll();
 int minElement=it[0];
