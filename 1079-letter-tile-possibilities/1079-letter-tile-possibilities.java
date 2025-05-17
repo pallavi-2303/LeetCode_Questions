@@ -1,21 +1,22 @@
 class Solution {
-public void backTrack(String tiles,String curr,boolean[] used,HashSet<String> st) {
-//if the character already exist
-if(st.contains(curr)) return;
-st.add(curr);
+public void solve(String tiles,boolean[] used,HashSet<String> res,StringBuilder curr){
+//base case add current sequence 
+res.add(curr.toString());
 for(int i=0;i<tiles.length();i++){
-if(used[i]) continue;
+if(used[i]){
+continue;}
 used[i]=true;
-backTrack(tiles,curr+tiles.charAt(i),used,st);
-used[i]=false;
-}
-}
+curr.append(tiles.charAt(i));
+solve(tiles,used,res,curr);
+//Backtrack after return back
+curr.deleteCharAt(curr.length()-1);
+used[i]=false;}}
     public int numTilePossibilities(String tiles) {
-      int n=tiles.length();
-HashSet<String> st=new HashSet<>();
+         //basic backtracking solution is by storing all the subsequences
+HashSet<String> res=new HashSet<>();
+int n=tiles.length();
 boolean[] used=new boolean[n];
-Arrays.fill(used,false);
-backTrack(tiles,"",used,st);
-return st.size()-1;  
+solve(tiles,used,res,new StringBuilder());
+return res.size()-1;//exclude one for the empty string   
     }
 }
