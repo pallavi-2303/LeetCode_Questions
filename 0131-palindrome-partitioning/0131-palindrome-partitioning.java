@@ -1,34 +1,29 @@
 class Solution {
-    public void pallindromePartition(int idx,List<List<String>> ans,List<String> temp,String s) {
-//base case
-if(idx==s.length()) {
-//no further partion to be made
-ans.add(new ArrayList<>(temp));
-return;
-}
-//try out all possible partion
-for(int i=idx;i<s.length();i++){
-if(isPallindrome(idx,i,s)) {
-temp.add(s.substring(idx,i+1));
-//call for next partion
-pallindromePartition(i+1,ans,temp,s);
-temp.remove(temp.size()-1);
-}
-}
-}
-public boolean isPallindrome(int i,int j,String s) {
-while(i<j) {
-if(s.charAt(i)!=s.charAt(j)) {
-return false;
-}
+public boolean isPallindrome(String s){
+int i=0;
+int j=s.length()-1;
+while(i<j){
+if(s.charAt(i)!=s.charAt(j)){
+return false;}
 i++;
-j--;
-}
-return true;
+j--;}
+return true;}
+ public void solve(int idx,List<String> temp,String s,List<List<String>> res){
+int n=s.length();
+if(idx>=n){
+res.add(new ArrayList<>(temp));
+return;}
+for(int j=idx;j<n;j++){
+String str=s.substring(idx,j+1);
+if(isPallindrome(str)){
+temp.add(str);
+solve(j+1,temp,s,res);
+temp.remove(temp.size()-1);}}
 }
     public List<List<String>> partition(String s) {
-        List<List<String>> res=new ArrayList<>();
-pallindromePartition(0,res,new ArrayList<>(),s);
+      List<List<String>> res=new ArrayList<>();
+solve(0,new ArrayList<>(),s,res);
 return res;
+   
     }
 }
