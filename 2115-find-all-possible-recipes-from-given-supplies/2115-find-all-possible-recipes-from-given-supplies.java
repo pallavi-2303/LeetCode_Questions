@@ -1,35 +1,43 @@
 class Solution {
     public List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
+    //since one recipe can only be made if we have ingrideients for that means the particular recipie is dependent maens recipi->i will be a directed edge
     int n=recipes.length;
-    //we have to tell which recipy is possible that's why we will try out al possible recipes and check whther this recipy can be made or not
-    //we have to make total n iteration to find out which recipy can we made from which
-int count=n;
-HashSet<String> st=new HashSet<>();
-for(String it:supplies) st.add(it);
-boolean[] made=new boolean[n];
-List<String> res=new ArrayList<>();
-while(count>0){
+    List<String> res=new ArrayList<>();
+    HashSet<String> present=new HashSet<>();
+    for(String st:supplies) {
+    present.add(st);
+    } 
+HashMap<String,List<Integer>> adj=new HashMap<>(); 
+int[] indegre=new int[n];
 for(int i=0;i<n;i++){
-if(made[i]){
-continue;
-}
-boolean flag=true;
 for(String ingri:ingredients.get(i)){
-if(!st.contains(ingri)){
-flag=false;
-break;
+if(!present.contains(ingri)){
+//this ith node is depent on this ingri
+indegre[i]++;
+adj.putIfAbsent(ingri,new ArrayList<>());
+adj.get(ingri).add(i);//edge grom ingri --> i
 }
 }
-if(flag){
-//all indrients are present htis can be made 
+}
+Queue<Integer> q=new LinkedList<>();
+for(int i=0;i<n;i++){
+if(indegre[i]==0){
+    //this is not indepent and it an be made 
+q.add(i);
+}
+}
+while(!q.isEmpty()){
+int i=q.poll();
 res.add(recipes[i]);
-made[i]=true;
-st.add(recipes[i]);//add this recipy to ingridients;
+if(adj.containsKey(recipes[i])){
+for(int it:adj.get(recipes[i])){
+indegre[it]--;
+if(indegre[it]==0){
+q.add(it);
 }
 }
-count--;
+}
 }
 return res;
-
     }
 }
