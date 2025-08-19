@@ -1,50 +1,35 @@
 class Solution {
-     private Set<String> availableSupplies;
-    private Map<String, List<String>> recipeToIngredients;
-    private Map<String, Integer> visited;
-    private List<String> result;
-    private boolean canMake(String recipe) {
-        if (visited.containsKey(recipe)) {
-            return visited.get(recipe) == 1;
-        }
-
-        if (availableSupplies.contains(recipe)) {
-            return true;
-        }
-
-        if (!recipeToIngredients.containsKey(recipe)) {
-            return false;
-        }
-
-        visited.put(recipe, 0);
-
-        for (String ingredient : recipeToIngredients.get(recipe)) {
-            if (!canMake(ingredient)) {
-                visited.put(recipe, -1);
-                return false;
-            }
-        }
-
-        visited.put(recipe, 1);
-        result.add(recipe);
-        return true;
-    }
     public List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
-      availableSupplies = new HashSet<>(Arrays.asList(supplies));
-        recipeToIngredients = new HashMap<>();
-        visited = new HashMap<>();
-        result = new ArrayList<>();
+    int n=recipes.length;
+    //we have to tell which recipy is possible that's why we will try out al possible recipes and check whther this recipy can be made or not
+    //we have to make total n iteration to find out which recipy can we made from which
+int count=n;
+HashSet<String> st=new HashSet<>();
+for(String it:supplies) st.add(it);
+boolean[] made=new boolean[n];
+List<String> res=new ArrayList<>();
+while(count>0){
+for(int i=0;i<n;i++){
+if(made[i]){
+continue;
+}
+boolean flag=true;
+for(String ingri:ingredients.get(i)){
+if(!st.contains(ingri)){
+flag=false;
+break;
+}
+}
+if(flag){
+//all indrients are present htis can be made 
+res.add(recipes[i]);
+made[i]=true;
+st.add(recipes[i]);//add this recipy to ingridients;
+}
+}
+count--;
+}
+return res;
 
-        for (int i = 0; i < recipes.length; i++) {
-            recipeToIngredients.put(recipes[i], ingredients.get(i));
-        }
-
-        for (String recipe : recipes) {
-            canMake(recipe);
-        }
-
-        return result;
-      
     }
-
 }
