@@ -21,7 +21,7 @@ this.row=row;
 this.col=col;
 }
 }
-public void bfs(char[][] grid,int r,int c,int[] delrow,int[] delcol,int[][] vis) {
+public void bfs(int r,int c,int[][] vis,char[][] grid,int[] delrow,int[] delcol) {
 int n=grid.length;
 int m=grid[0].length;
 Queue<pair> q=new LinkedList<>();
@@ -35,7 +35,7 @@ int col=pq.col;
 for(int i=0;i<4;i++){
 int nrow=row+delrow[i];
 int ncol=col+delcol[i];
-if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && grid[nrow][ncol]=='1'&& vis[row][ncol]==0){
+if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && grid[nrow][ncol]=='1'&& vis[nrow][ncol]==0){
 vis[nrow][ncol]=1;
 q.add(new pair(nrow,ncol));
 }
@@ -53,7 +53,8 @@ for(int i=0;i<n;i++){
 for(int j=0;j<m;j++){
 if(vis[i][j]==0 && grid[i][j]=='1'){
 count++;
-dfs(i,j,vis,grid,delrow,delcol);
+//dfs(i,j,vis,grid,delrow,delcol);
+bfs(i,j,vis,grid,delrow,delcol);
 }
 }
 }
