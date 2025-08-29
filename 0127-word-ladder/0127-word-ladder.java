@@ -1,39 +1,40 @@
 class Solution {
-public class pair {
- String first;
- int second;
-   public pair(String first,int second) {
-  this.first=first;
-   this.second=second;}}
+    public class pair{
+String word;
+int steps;
+pair(String word,int steps){
+this.word=word;
+this.steps=steps;
+}
+}
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-  Queue<pair> q=new LinkedList<>();
-HashSet<String> st=new HashSet<>();
-int n=wordList.size();
- for(int i=0;i<n;i++) {
-    st.add(wordList.get(i));}
- st.remove(beginWord);
- q.add(new pair(beginWord,1));
-   //petforming bfs to Find number of steps to reach end
-  while(!q.isEmpty()) {
-   pair it=q.poll();
-  String word=it.first;
-   int steps=it.second;
- //check if target word is equal to end word 
-   if(word.equals(endWord)==true){ 
-           return steps;}
- //perform to steps and change the word
-  for(int i=0;i<word.length();i++){
-//for every letter change from a to z
- for(char ch='a';ch<='z';ch++) {
- char[] wordArray=word.toCharArray();
- wordArray[i]=ch;
-String changedWord=new String(wordArray);
- if(st.contains(changedWord)) {
-   st.remove(changedWord);
-    q.add(new pair(changedWord,steps+1));}
-         }
-          } }
-            return 0;
-           
+     HashSet<String> st=new HashSet<>(wordList);
+Queue<pair> q=new LinkedList<>();
+q.add(new pair(beginWord,1));
+st.remove(beginWord);
+//Number of word in wordList
+//Size of wordList*26*(size of longest word);
+while(!q.isEmpty()){
+pair it=q.poll();
+String word=it.word;
+int steps=it.steps;
+if(word.equals(endWord)){
+return steps;
+}
+//Change avery character of word from a to z
+for(int i=0;i<word.length();i++){
+char[] arr=word.toCharArray();
+//Change every character from a to z
+for(char ch='a';ch<='z';ch++){
+arr[i]=ch;
+String newWord=new String(arr);
+if(st.contains(newWord)){
+q.add(new pair(newWord,steps+1));
+st.remove(newWord);
+}
+}
+}
+}
+return 0;//if answer is not found   
     }
 }
