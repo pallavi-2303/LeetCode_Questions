@@ -1,63 +1,48 @@
 class Solution {
-    public void dfs(int row,int col,int[][] vis,char[][] grid,int[] delrow,int[] delcol) {
-//mark the current cel
-vis[row][col]=1;
-int n=grid.length;
-int m=grid[0].length;
-//traverse all the neighbours
-for(int i=0;i<4;i++){
-int nrow=row+delrow[i];
-int ncol=col+delcol[i];
-if(nrow>=0 && nrow<n && ncol>=0 && ncol<m && vis[nrow][ncol]==0 && grid[nrow][ncol]=='1') {
-dfs(nrow,ncol,vis,grid,delrow,delcol);
+int[][] dir={{-1,0},{0,-1},{1,0},{0,1}};
+int n;
+int m;
+public void dfs(int i,int j,char[][] grid,int[][] vis){
+vis[i][j]=1;
+for(int id=0;id<4;id++){
+int nrow=i+dir[id][0];
+int ncol=j+dir[id][1];
+if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && grid[nrow][ncol]=='1' && vis[nrow][ncol]==0){
+dfs(nrow,ncol,grid,vis);
 }
 }
 }
-public class pair{
-int row;
-int col;
-public pair(int row,int col) {
-this.row=row;
-this.col=col;
-}
-}
-public void bfs(int r,int c,int[][] vis,char[][] grid,int[] delrow,int[] delcol) {
-int n=grid.length;
-int m=grid[0].length;
-Queue<pair> q=new LinkedList<>();
-q.add(new pair(r,c));
-vis[r][c]=1;
-while(!q.isEmpty()) {
-pair pq=q.poll();
-int row=pq.row;
-int col=pq.col;
-//traversing all the 4 direction for given row
-for(int i=0;i<4;i++){
-int nrow=row+delrow[i];
-int ncol=col+delcol[i];
-if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && grid[nrow][ncol]=='1'&& vis[nrow][ncol]==0){
+public void bfs(int i,int j,char[][] grid,int[][] vis){
+Queue<int[]> q=new LinkedList<>();
+q.add(new int[]{i,j});
+vis[i][j]=1;
+while(!q.isEmpty()){
+int[] a=q.poll();
+int row=a[0];
+int col=a[1];
+for(int[] d:dir){
+int nrow=row+d[0];
+int ncol=col+d[1];
+if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && grid[nrow][ncol]=='1' && vis[nrow][ncol]==0){
 vis[nrow][ncol]=1;
-q.add(new pair(nrow,ncol));
+q.add(new int[]{nrow,ncol});
 }
 }
 }
 }
     public int numIslands(char[][] grid) {
-        int n=grid.length;
-int m=grid[0].length;
-int[][] vis=new int[n][m];
-int[] delrow={-1,1,0,0};
-int[] delcol={0,0,-1,1};
+      n=grid.length;
+m=grid[0].length;
 int count=0;
+int[][] vis=new int[n][m];
 for(int i=0;i<n;i++){
 for(int j=0;j<m;j++){
-if(vis[i][j]==0 && grid[i][j]=='1'){
+if(grid[i][j]=='1' && vis[i][j]==0){
 count++;
-//dfs(i,j,vis,grid,delrow,delcol);
-bfs(i,j,vis,grid,delrow,delcol);
+dfs(i,j, grid,vis);
 }
 }
 }
-return count;
+return count;  
     }
 }
