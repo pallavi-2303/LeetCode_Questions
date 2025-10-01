@@ -1,38 +1,32 @@
 class Solution {
+int n;
+int[][] dp;
+public int upperBound(int low,int[][] arr,int target){
+int high=n;
+while(low<high){
+int mid=low+(high-low)/2;
+if(arr[mid][0]<=target){
+low=mid+1;
+}
+else high=mid;
+}
+return low; 
+}
+public int solve(int idx,int[][] events,int k,int[][] dp){
+if(idx>=n || k==0) return 0;
+if(dp[idx][k]!=-1) return dp[idx][k];
+//at any index we hae two options wheather to take the current index or not
+int notTake=solve(idx+1,events,k,dp);
+int take=events[idx][2];
+int nextIdx=upperBound(idx+1,events,events[idx][1]);
+take+=solve(nextIdx,events,k-1,dp);
+return dp[idx][k]= Math.max(notTake,take);
+}
     public int maxValue(int[][] events, int k) {
-        int n = events.length;
-        Arrays.sort(events, Comparator.comparingInt(e -> e[0]));
-        int[] starts = new int[n], next_idx = new int[n];
-        for (int i = 0; i < n; ++i) starts[i] = events[i][0];
-        for (int i = 0; i < n; ++i)
-            next_idx[i] = Arrays.binarySearch(starts, events[i][1] + 1) < 0
-                ? -Arrays.binarySearch(starts, events[i][1] + 1) - 1
-                : upperBound(starts, events[i][1]);
-        long[] prev = new long[n+1], curr;
-        for (int i = n - 1; i >= 0; --i)
-            prev[i] = Math.max(prev[i+1], events[i][2]);
-        long res = prev[0];
-        for (int t = 2; t <= k; ++t) {
-            curr = new long[n+1];
-            for (int i = n - 1; i >= 0; --i) {
-                long take = events[i][2];
-                int j = next_idx[i];
-                if (j <= n) take += prev[j];
-                curr[i] = Math.max(curr[i+1], take);
-            }
-            res = Math.max(res, curr[0]);
-            prev = curr;
-        }
-        return (int)res;
-    }
-
-    private int upperBound(int[] a, int key) {
-        int lo = 0, hi = a.length;
-        while (lo < hi) {
-            int mid = (lo + hi) >>> 1;
-            if (a[mid] <= key) lo = mid + 1;
-            else hi = mid;
-        }
-        return lo;
+       n=events.length;
+       dp=new int[n+1][k+1];
+       for(int[] a:dp) Arrays.fill(a,-1);
+       Arrays.sort(events,Comparator.comparingInt(event->event[0])) ;
+       return solve(0,events,k,dp);
     }
 }
