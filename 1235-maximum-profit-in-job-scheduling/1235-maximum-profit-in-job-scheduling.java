@@ -1,6 +1,7 @@
 class Solution {
 int n;
-public int lowerBound(int l,int[][] arr,int target){
+int[] dp;
+public int upperBound(int  target,int[][] arr,int l){
 int r=n;
 while(l<r){
 int mid=l+(r-l)/2;
@@ -13,37 +14,30 @@ l=mid+1;
 }
 return l;
 }
-public int solve(int idx,int[][] arr,int[] dp){
+public int solve(int idx,int[][] arr){
 if(idx>=n) return 0;
-if(dp[idx]!=-1) return dp[idx];
-//at any index we have two options yake and not take
-int nextIdx=lowerBound(idx,arr,arr[idx][1]);
-int take=arr[idx][2]+solve(nextIdx,arr,dp);
-int notTake=solve(idx+1,arr,dp);
+if(dp[idx]!=-1){
+return dp[idx];
+}
+int notTake=solve(idx+1,arr);
+int take=arr[idx][2];
+int nextIdx=upperBound(arr[idx][1],arr,idx);
+take+=solve(nextIdx,arr);
 return dp[idx]=Math.max(take,notTake);
 }
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
-//Now we have to add all this in one and sort according to starting time
-    n=startTime.length;
+   //since job can be done in any order we just have to maximise the profit and at any index if have two options either to do the current job or leave it.
+n=profit.length;
 int[][] arr=new int[n][3];
 for(int i=0;i<n;i++){
 arr[i][0]=startTime[i];
 arr[i][1]=endTime[i];
 arr[i][2]=profit[i];
 }
-Arrays.sort(arr,Comparator.comparingInt(vec->vec[0]));
-int[] dp=new int[n+1];
-/*Arrays.fill(dp,-1);
-    return solve(0,arr,dp);*/
-for(int i=n-1;i>=0;i--){
-int nextIdx=lowerBound(i,arr,arr[i][1]);
-int take=arr[i][2];
-if(nextIdx!=i) {
-take+=dp[nextIdx];
-}
-int notTake=dp[i+1];
-dp[i]=Math.max(take,notTake);
-}
-    return dp[0];
+//Sort on badais of start time so that starttone can be independent 
+Arrays.sort(arr, Comparator.comparingInt(a->a[0]));
+dp=new int[n+1];
+Arrays.fill(dp,-1);
+return solve(0,arr);     
     }
 }
