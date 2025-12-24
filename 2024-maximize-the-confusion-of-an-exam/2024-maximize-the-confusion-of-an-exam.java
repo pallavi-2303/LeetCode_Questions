@@ -10,7 +10,7 @@ while(r<n){
 if(answerKey.charAt(r)==ch){
 count++;
 }
-while(count>k){
+if(count>k){
 if(answerKey.charAt(l)==ch){
 count--;
 }
