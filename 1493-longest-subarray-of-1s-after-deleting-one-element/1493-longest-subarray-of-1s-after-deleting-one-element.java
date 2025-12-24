@@ -1,16 +1,19 @@
 class Solution {
     public int longestSubarray(int[] nums) {
-     //longest subaray with max 1 zero 
      int n=nums.length;
      int maxLen=0;
-     for(int i=0;i<n;i++) {
-    int zero=0;
-    for(int j=i;j<n;j++){
-    if(nums[j]==0) zero++;
-    if(zero>1) break;
-    maxLen=Math.max(maxLen,j-i+1);
+     int l=0;
+     int r=0;
+     int zero=0;
+     while(r<n) {
+    if(nums[r]==0) zero++;
+    while(zero>1){
+    if(nums[l]==0) zero--;
+    l++;
     }
+    maxLen=Math.max(maxLen,r-l+1);
+    r++;
      } 
-     return maxLen-1;//-1 for deletion of one zero 
+     return maxLen-1; 
     }
 }
