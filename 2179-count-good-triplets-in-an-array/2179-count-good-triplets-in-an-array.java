@@ -1,23 +1,48 @@
 class Solution {
-    public long goodTriplets(int[] nums1, int[] nums2) {
-      HashMap<Integer, Integer> mpp = new HashMap<>();
-        for (int i = 0; i < nums1.length; i++) mpp.put(nums1[i], i);
-        int n = nums2.length;
-        long total = 0;
-        ArrayList<Integer> st = new ArrayList<>();
-        for (int x : nums2) {
-            int idx = mpp.get(x);
-            int left = orderOfKey(st, idx);
-            int right = (n - 1 - idx) - (st.size() - left);
-            total += (long) left * right;
-            int pos = Collections.binarySearch(st, idx);
-            if (pos < 0) pos = -pos - 1;
-            st.add(pos, idx);
-        }
-        return total;   
+    public void updateQuery(int i,int l,int r,int updateIdx,long[] segment){
+    if(l==r){
+    segment[i]=1;
+    return;
     }
-     private int orderOfKey(ArrayList<Integer> st, int key) {
-        int pos = Collections.binarySearch(st, key);
-        return pos < 0 ? -pos - 1 : pos;
+int mid=l+(r-l)/2;
+if(updateIdx<=mid){
+updateQuery(2*i+1,l,mid,updateIdx,segment);
+}
+else {
+updateQuery(2*i+2,mid+1,r,updateIdx,segment);
+}
+segment[i]=segment[2*i+1]+segment[2*i+2];
+    }
+public long findQuery(int st,int end,int i,int l,int r,long[] segment){
+if(r<st || l>end || l>r){
+return 0;
+}
+if(l>=st && r<=end){
+return segment[i];
+}
+int mid=l+(r-l)/2;
+return findQuery(st,end,2*i+1,l,mid,segment)+findQuery(st,end,2*i+2,mid+1,r,segment);
+
+}
+    public long goodTriplets(int[] nums1, int[] nums2) {
+    int n=nums1.length;
+     HashMap<Integer,Integer> mp=new HashMap<>();
+    for(int i=0;i<n;i++){
+    mp.put(nums2[i],i);
+    } 
+long[] segment=new long[4*n];
+updateQuery(0,0,n-1,mp.get(nums1[0]),segment);
+long total=0;
+for(int i=1;i<n;i++){
+int idx=mp.get(nums1[i]);
+long leftCommon=findQuery(0,idx,0,0,n-1,segment);
+long leftUnCommon=i-leftCommon;
+long rightTotal=(n-1-idx);
+long rightCommon=rightTotal-leftUnCommon;
+total=total+(leftCommon*rightCommon);
+updateQuery(0,0,n-1,mp.get(nums1[i]),segment);
+
+}
+return total;
     }
 }
