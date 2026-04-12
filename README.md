@@ -31,4 +31,24 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [2179-count-good-triplets-in-an-array](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2179-count-good-triplets-in-an-array/) | Hard |
+## Hash Table
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
+## Math
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
+## String
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
+## Number Theory
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
+## Prefix Sum
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
 <!---LeetCode Topics End-->
