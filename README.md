@@ -46,6 +46,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
+| [0151-reverse-words-in-a-string](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0151-reverse-words-in-a-string/) | Medium |
 | [0451-sort-characters-by-frequency](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0451-sort-characters-by-frequency/) | Medium |
 | [1614-maximum-nesting-depth-of-the-parentheses](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/1614-maximum-nesting-depth-of-the-parentheses/) | Easy |
 | [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
@@ -77,4 +78,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [1614-maximum-nesting-depth-of-the-parentheses](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/1614-maximum-nesting-depth-of-the-parentheses/) | Easy |
+## Two Pointers
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0151-reverse-words-in-a-string](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0151-reverse-words-in-a-string/) | Medium |
 <!---LeetCode Topics End-->
