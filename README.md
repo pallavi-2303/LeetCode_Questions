@@ -45,6 +45,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## String
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0005-longest-palindromic-substring](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0005-longest-palindromic-substring/) | Medium |
 | [0008-string-to-integer-atoi](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0008-string-to-integer-atoi/) | Medium |
 | [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
 | [0151-reverse-words-in-a-string](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0151-reverse-words-in-a-string/) | Medium |
@@ -82,5 +83,10 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Two Pointers
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0005-longest-palindromic-substring](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0005-longest-palindromic-substring/) | Medium |
 | [0151-reverse-words-in-a-string](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0151-reverse-words-in-a-string/) | Medium |
+## Dynamic Programming
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0005-longest-palindromic-substring](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0005-longest-palindromic-substring/) | Medium |
 <!---LeetCode Topics End-->
