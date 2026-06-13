@@ -34,15 +34,18 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Hash Table
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
 | [0451-sort-characters-by-frequency](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0451-sort-characters-by-frequency/) | Medium |
 | [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
 ## Math
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
 | [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
 ## String
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
 | [0451-sort-characters-by-frequency](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0451-sort-characters-by-frequency/) | Medium |
 | [1614-maximum-nesting-depth-of-the-parentheses](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/1614-maximum-nesting-depth-of-the-parentheses/) | Easy |
 | [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
