@@ -6,6 +6,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0733-flood-fill](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0733-flood-fill/) | Easy |
 | [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
 | [2179-count-good-triplets-in-an-array](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2179-count-good-triplets-in-an-array/) | Hard |
 ## Binary Search
@@ -96,9 +97,15 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Breadth-First Search
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0733-flood-fill](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0733-flood-fill/) | Easy |
 | [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
 ## Matrix
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0733-flood-fill](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0733-flood-fill/) | Easy |
 | [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
+## Depth-First Search
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0733-flood-fill](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0733-flood-fill/) | Easy |
 <!---LeetCode Topics End-->
