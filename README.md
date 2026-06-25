@@ -6,6 +6,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
 | [2179-count-good-triplets-in-an-array](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2179-count-good-triplets-in-an-array/) | Hard |
 ## Binary Search
 | Problem Name | Difficulty |
@@ -92,4 +93,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0005-longest-palindromic-substring](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0005-longest-palindromic-substring/) | Medium |
+## Breadth-First Search
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
+## Matrix
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
 <!---LeetCode Topics End-->
