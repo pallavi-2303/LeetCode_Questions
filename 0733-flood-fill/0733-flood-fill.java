@@ -1,26 +1,27 @@
 class Solution {
-    public void dfs(int sr,int sc,int color,int inicolor,int[][] vis,int[][] image,int[] dr,int[] dc) {
-int n=image.length;
-int m=image[0].length;
-vis[sr][sc]=color;
-//try in 4 direction
-for(int i=0;i<4;i++){
-int nrow=sr+dr[i];
-int ncol=sc+dc[i];
-if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && vis[nrow][ncol]!=color && image[nrow][ncol]==inicolor) {
-dfs(nrow,ncol,color,inicolor,vis,image,dr,dc);
-}
-}
-}
+    int n;
+    int m;
+    int iniCol;
+    int[][] dir={{-1,0},{0,-1},{1,0},{0,1}};
+    public void dfs(int r,int c,int[][] image,int[][] vis,int color){
+    image[r][c]=color;
+    vis[r][c]=1;
+    for(int[] d:dir){
+    int nr=r+d[0];
+    int nc=c+d[1];
+    if(nr>=0 && nc>=0 && nr<n && nc<m && vis[nr][nc]==0 && image[nr][nc]==iniCol){
+    dfs(nr,nc,image,vis,color);
+    }
+    }
+    }
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-       int n=image.length;
-int m=image[0].length;
-int[][] vis=new int[n][m];
-vis=image;
-int[] delrow={-1,1,0,0};
-int[] delcol={0,0,-1,1};
-int initialcolor=image[sr][sc];
-dfs(sr,sc,color, initialcolor,vis,image,delrow,delcol);
-return vis; 
+     n=image.length;
+     m=image[0].length;
+     iniCol=image[sr][sc];
+     int[][] vis=new int[n][m];
+     dfs(sr,sc,image,vis,color);
+     return image;
+
+
     }
 }
