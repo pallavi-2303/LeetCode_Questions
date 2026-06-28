@@ -44,6 +44,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
+| [0070-climbing-stairs](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0070-climbing-stairs/) | Easy |
 | [2949-count-beautiful-substrings-ii](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2949-count-beautiful-substrings-ii/) | Hard |
 ## String
 | Problem Name | Difficulty |
@@ -94,6 +95,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0005-longest-palindromic-substring](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0005-longest-palindromic-substring/) | Medium |
+| [0070-climbing-stairs](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0070-climbing-stairs/) | Easy |
 ## Breadth-First Search
 | Problem Name | Difficulty |
 | ------- | ------- |
@@ -108,4 +110,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [0733-flood-fill](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0733-flood-fill/) | Easy |
+## Memoization
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0070-climbing-stairs](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0070-climbing-stairs/) | Easy |
 <!---LeetCode Topics End-->
