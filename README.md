@@ -6,6 +6,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0001-two-sum](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0001-two-sum/) | Easy |
 | [0733-flood-fill](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0733-flood-fill/) | Easy |
 | [0994-rotting-oranges](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0994-rotting-oranges/) | Medium |
 | [2179-count-good-triplets-in-an-array](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/2179-count-good-triplets-in-an-array/) | Hard |
@@ -36,6 +37,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Hash Table
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [0001-two-sum](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0001-two-sum/) | Easy |
 | [0013-roman-to-integer](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0013-roman-to-integer/) | Easy |
 | [0451-sort-characters-by-frequency](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/0451-sort-characters-by-frequency/) | Medium |
 | [1781-sum-of-beauty-of-all-substrings](https://github.com/pallavi-2303/LeetCode_Questions/tree/main/1781-sum-of-beauty-of-all-substrings/) | Medium |
